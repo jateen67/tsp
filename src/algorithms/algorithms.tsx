@@ -8,6 +8,7 @@ type Animation = {
   compare?: number[][];
   cross?: number[][];
   backtrack?: number[][];
+  finalPath?: number[][];
 };
 
 export const nearestNeighbor = (coordinates: number[][]): TSPResult => {
@@ -137,6 +138,10 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
 
   animations.push({
     backtrack: [coordinates[currentCity], coordinates[0]],
+  });
+  bestPath.push(coordinates[0]);
+  animations.push({
+    finalPath: bestPath,
   });
 
   return {

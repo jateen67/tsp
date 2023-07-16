@@ -17,7 +17,7 @@ export default function TSPVisualizer() {
     //console.log(totalDistance);
     console.log(animations);
     for (let i = 0; i < animations.length; i++) {
-      const { cross, backtrack } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
+      const { cross, backtrack, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
         const lines = document.getElementsByClassName(
           "line"
@@ -45,6 +45,9 @@ export default function TSPVisualizer() {
         }
         if (backtrack != undefined) {
           lines[backtrack[1][2]].style.backgroundColor = "transparent";
+        }
+        if (finalPath != undefined) {
+          void 0;
         }
       }, i * 500);
     }
