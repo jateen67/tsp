@@ -125,7 +125,7 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
 
         // Backtrack
         visited[nextCity] = false;
-        console.log(path.pop());
+        path.pop();
         animations.push({
           backtrack: [coordinates[currentCity], coordinates[nextCity]],
         });

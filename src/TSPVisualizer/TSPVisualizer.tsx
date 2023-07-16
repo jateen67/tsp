@@ -13,9 +13,6 @@ export default function TSPVisualizer() {
   const depthFirstSearch = () => {
     const { path, totalDistance, animations } =
       algorithms.depthFirstSearch(coords);
-    //console.log(path);
-    //console.log(totalDistance);
-    console.log(animations);
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -47,7 +44,22 @@ export default function TSPVisualizer() {
           lines[backtrack[1][2]].style.backgroundColor = "transparent";
         }
         if (finalPath != undefined) {
-          void 0;
+          for (let i = 0; i < finalPath.length - 1; i++) {
+            const x2 = finalPath[i][0];
+            const x1 = finalPath[i + 1][0];
+            const y2 = finalPath[i][1];
+            const y1 = finalPath[i + 1][1];
+            const xLength = x2 - x1;
+            const yLength = y2 - y1;
+            const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
+            let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
+            if (x2 > x1) {
+              angle += 180;
+            }
+            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.width = `${distance}%`;
+            lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
+          }
         }
       }, i * 500);
     }
