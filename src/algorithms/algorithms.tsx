@@ -173,29 +173,41 @@ export const simulatedAnnealing = (
     for (let i = 0; i < path.length - 1; i++) {
       totalDistance += calculateDistance(path[i], path[i + 1]);
     }
+    // Add the distance from the last city to the starting city
     totalDistance += calculateDistance(path[path.length - 1], path[0]);
     return totalDistance;
   }
 
   // Generate an initial random solution
-  const currentPath: number[][] = coordinates.slice();
-  for (let i = numCities - 1; i > 0; i--) {
+  const initialPath = coordinates.slice(1); // Exclude the starting point
+  for (let i = numCities - 2; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
+    [initialPath[i], initialPath[j]] = [initialPath[j], initialPath[i]];
   }
-
+  const currentPath: number[][] = [coordinates[0], ...initialPath]; // Add the starting point at the beginning
+  animations.push({
+    compare: currentPath,
+  });
   let currentDistance = calculateTotalDistance(currentPath);
   let bestPath: number[][] = [...currentPath];
   let bestDistance = currentDistance;
 
+  let x = 0;
   while (temperature > stoppingTemperature) {
     // Generate a random neighboring solution
-    const i = Math.floor(Math.random() * numCities);
-    const j = Math.floor(Math.random() * numCities);
-    [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
+    const i = Math.floor(Math.random() * (numCities - 1)) + 1; // Exclude the starting point
+    const j = Math.floor(Math.random() * (numCities - 1)) + 1; // Exclude the starting point
+    const newPath = [...currentPath]; // Create a new array to store the updated path
+    [newPath[i], newPath[j]] = [newPath[j], newPath[i]];
+
+    if (x % 10000 === 0) {
+      animations.push({
+        compare: newPath,
+      });
+    }
 
     // Calculate the total distance of the new solution
-    const newDistance = calculateTotalDistance(currentPath);
+    const newDistance = calculateTotalDistance(newPath);
 
     // Determine if the new solution should be accepted
     if (
@@ -203,20 +215,24 @@ export const simulatedAnnealing = (
       Math.random() < Math.exp((currentDistance - newDistance) / temperature)
     ) {
       currentDistance = newDistance;
+      currentPath.splice(0, currentPath.length, ...newPath); // Update the currentPath
       if (newDistance < bestDistance) {
         bestPath = [...currentPath];
         bestDistance = newDistance;
       }
-    } else {
-      // Revert the change
-      [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
     }
 
     // Cool down the temperature
     temperature *= coolingRate;
+    x++;
   }
 
+  // Add the starting point at the end of the best path
   bestPath.push(coordinates[0]);
+
+  animations.push({
+    finalPath: bestPath,
+  });
 
   return {
     path: bestPath,
