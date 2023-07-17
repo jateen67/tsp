@@ -256,8 +256,10 @@ export const branchAndBound = (coordinates: number[][]): TSPResult => {
       const lastCity = path[path.length - 1];
       const distanceToStart = calculateDistance(lastCity, coordinates[0]);
       const totalDistance = currentDistance + distanceToStart;
-
       if (totalDistance < bestDistance) {
+        animations.push({
+          cross: [coordinates[currentCity], coordinates[0]],
+        });
         bestDistance = totalDistance;
         bestPath = [...path, coordinates[0]];
       }
