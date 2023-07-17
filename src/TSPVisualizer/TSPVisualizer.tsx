@@ -74,10 +74,10 @@ export default function TSPVisualizer() {
           }
         }
         if (cross != undefined) {
-          const x2 = cross[0][0];
           const x1 = cross[1][0];
-          const y2 = cross[0][1];
+          const x2 = cross[0][0];
           const y1 = cross[1][1];
+          const y2 = cross[0][1];
           const xLength = x2 - x1;
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
@@ -115,9 +115,12 @@ export default function TSPVisualizer() {
   };
 
   const simulatedAnnealing = () => {
+    const xLength = coords[0][0] - coords[1][0];
+    const yLength = coords[0][1] - coords[1][1];
+    const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
     const { path, totalDistance, animations } = algorithms.simulatedAnnealing(
       coords,
-      100,
+      100 * distance,
       1 - 1e-4,
       1e-6
     );
@@ -243,10 +246,6 @@ export default function TSPVisualizer() {
     }
   };
 
-  const bruteForce = () => {
-    void 0;
-  };
-
   const randomCoordFromInterval = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
@@ -336,7 +335,6 @@ export default function TSPVisualizer() {
       <button onClick={depthFirstSearch}>Depth First Search</button>
       <button onClick={simulatedAnnealing}>Simulated Annealing</button>
       <button onClick={branchAndBound}>Branch and Bound</button>
-      <button onClick={bruteForce}>Brute Force</button>
     </div>
   );
 }
