@@ -127,7 +127,7 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         visited[nextCity] = false;
         path.pop();
         animations.push({
-          backtrack: [coordinates[currentCity], coordinates[nextCity]],
+          backtrack: [coordinates[nextCity]],
         });
         totalDistance -= distance;
       }
@@ -140,6 +140,155 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
     backtrack: [coordinates[currentCity], coordinates[0]],
   });
   bestPath.push(coordinates[0]);
+  animations.push({
+    finalPath: bestPath,
+  });
+
+  return {
+    path: bestPath,
+    totalDistance: bestDistance,
+    animations,
+  };
+};
+
+export const simulatedAnnealing = (
+  coordinates: number[][],
+  temperature: number,
+  coolingRate: number,
+  stoppingTemperature: number
+): TSPResult => {
+  const animations: Animation[] = [];
+  const numCities = coordinates.length;
+
+  // Helper function to calculate the distance between two cities
+  function calculateDistance(city1: number[], city2: number[]): number {
+    const [x1, y1] = city1;
+    const [x2, y2] = city2;
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  }
+
+  // Helper function to calculate the total distance of a path
+  function calculateTotalDistance(path: number[][]): number {
+    let totalDistance = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      totalDistance += calculateDistance(path[i], path[i + 1]);
+    }
+    totalDistance += calculateDistance(path[path.length - 1], path[0]);
+    return totalDistance;
+  }
+
+  // Generate an initial random solution
+  const currentPath: number[][] = coordinates.slice();
+  for (let i = numCities - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
+  }
+
+  let currentDistance = calculateTotalDistance(currentPath);
+  let bestPath: number[][] = [...currentPath];
+  let bestDistance = currentDistance;
+
+  while (temperature > stoppingTemperature) {
+    // Generate a random neighboring solution
+    const i = Math.floor(Math.random() * numCities);
+    const j = Math.floor(Math.random() * numCities);
+    [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
+
+    // Calculate the total distance of the new solution
+    const newDistance = calculateTotalDistance(currentPath);
+
+    // Determine if the new solution should be accepted
+    if (
+      newDistance < currentDistance ||
+      Math.random() < Math.exp((currentDistance - newDistance) / temperature)
+    ) {
+      currentDistance = newDistance;
+      if (newDistance < bestDistance) {
+        bestPath = [...currentPath];
+        bestDistance = newDistance;
+      }
+    } else {
+      // Revert the change
+      [currentPath[i], currentPath[j]] = [currentPath[j], currentPath[i]];
+    }
+
+    // Cool down the temperature
+    temperature *= coolingRate;
+  }
+
+  bestPath.push(coordinates[0]);
+
+  return {
+    path: bestPath,
+    totalDistance: bestDistance,
+    animations,
+  };
+};
+
+export const branchAndBound = (coordinates: number[][]): TSPResult => {
+  const animations: Animation[] = [];
+  const numCities = coordinates.length;
+  const visited: boolean[] = new Array<boolean>(numCities).fill(false);
+  const path: number[][] = [];
+  let bestPath: number[][] = [];
+  let bestDistance = Infinity;
+
+  // Helper function to calculate the distance between two cities
+  function calculateDistance(city1: number[], city2: number[]): number {
+    animations.push({
+      compare: [city1, city2],
+    });
+    const [x1, y1] = city1;
+    const [x2, y2] = city2;
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  }
+
+  // Recursive function for branch and bound
+  function branchAndBound(
+    currentCity: number,
+    depth: number,
+    currentDistance: number
+  ) {
+    visited[currentCity] = true;
+    path.push(coordinates[currentCity]);
+
+    if (depth === numCities - 1) {
+      const lastCity = path[path.length - 1];
+      const distanceToStart = calculateDistance(lastCity, coordinates[0]);
+      const totalDistance = currentDistance + distanceToStart;
+
+      if (totalDistance < bestDistance) {
+        bestDistance = totalDistance;
+        bestPath = [...path, coordinates[0]];
+      }
+    } else {
+      for (let nextCity = 1; nextCity < numCities; nextCity++) {
+        if (!visited[nextCity]) {
+          const distance = calculateDistance(
+            coordinates[currentCity],
+            coordinates[nextCity]
+          );
+          const newDistance = currentDistance + distance;
+
+          if (newDistance < bestDistance) {
+            animations.push({
+              cross: [coordinates[currentCity], coordinates[nextCity]],
+            });
+            branchAndBound(nextCity, depth + 1, newDistance);
+          }
+        }
+      }
+    }
+
+    visited[currentCity] = false;
+    path.pop();
+    animations.push({
+      backtrack: [coordinates[currentCity]],
+    });
+  }
+
+  branchAndBound(0, 0, 0);
+
   animations.push({
     finalPath: bestPath,
   });
