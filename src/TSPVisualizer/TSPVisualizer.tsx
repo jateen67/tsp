@@ -293,6 +293,13 @@ export default function TSPVisualizer() {
 
   return (
     <div className="container">
+      <div className="side-container">
+        <button onClick={resetCoords}>Generate New Coordinates</button>
+        <button onClick={nearestNeighbour}>Nearest Neighbour</button>
+        <button onClick={depthFirstSearch}>Depth First Search</button>
+        <button onClick={simulatedAnnealing}>Simulated Annealing</button>
+        <button onClick={branchAndBound}>Branch and Bound</button>
+      </div>
       <div className="coordinate-container">
         {coords.map((items, idx) => {
           return (
@@ -330,11 +337,6 @@ export default function TSPVisualizer() {
           );
         })}
       </div>
-      <button onClick={resetCoords}>Generate New Coordinates</button>
-      <button onClick={nearestNeighbour}>Nearest Neighbour</button>
-      <button onClick={depthFirstSearch}>Depth First Search</button>
-      <button onClick={simulatedAnnealing}>Simulated Annealing</button>
-      <button onClick={branchAndBound}>Branch and Bound</button>
     </div>
   );
 }
