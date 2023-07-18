@@ -300,42 +300,44 @@ export default function TSPVisualizer() {
         <button onClick={simulatedAnnealing}>Simulated Annealing</button>
         <button onClick={branchAndBound}>Branch and Bound</button>
       </div>
-      <div className="coordinate-container">
-        {coords.map((items, idx) => {
-          return (
-            <div
-              className="coordinate"
-              key={idx}
-              style={{
-                position: "absolute",
-                left: `${items[0]}%`,
-                top: `${items[1]}%`,
-              }}
-            >
-              {items[0]}, {items[1]}
-            </div>
-          );
-        })}
-        {coords.map((items, idx) => {
-          const x1 = coords[0][0];
-          const x2 = items[0];
-          const y1 = coords[0][1];
-          const y2 = items[1];
-          const xLength = x2 - x1;
-          const yLength = y2 - y1;
-          const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
-          return (
-            <div
-              className="line"
-              key={idx}
-              style={{
-                left: `${items[0]}%`,
-                top: `${items[1]}%`,
-                width: `${distance}%`,
-              }}
-            ></div>
-          );
-        })}
+      <div className="main-container">
+        <div className="coordinate-container">
+          {coords.map((items, idx) => {
+            return (
+              <div
+                className="coordinate"
+                key={idx}
+                style={{
+                  position: "absolute",
+                  left: `${items[0]}%`,
+                  top: `${items[1]}%`,
+                }}
+              >
+                {items[0]}, {items[1]}
+              </div>
+            );
+          })}
+          {coords.map((items, idx) => {
+            const x1 = coords[0][0];
+            const x2 = items[0];
+            const y1 = coords[0][1];
+            const y2 = items[1];
+            const xLength = x2 - x1;
+            const yLength = y2 - y1;
+            const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
+            return (
+              <div
+                className="line"
+                key={idx}
+                style={{
+                  left: `${items[0]}%`,
+                  top: `${items[1]}%`,
+                  width: "1%",
+                }}
+              ></div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

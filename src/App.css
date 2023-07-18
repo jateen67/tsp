@@ -1,13 +1,29 @@
 .container {
   display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  border: 1px solid green;
 }
 
 .coordinate-container {
   position: relative;
-  height: 70vh;
-  width: 70vh;
+  height: 750px;
+  width: 750px;
   margin: 0 auto;
+  top: 50%;
+  transform: translate(0, -50%);
   border: 1px solid black;
+}
+
+.side-container {
+  height: 100%;
+  width: 35%;
+  border: 1px solid red;
 }
 
 .coordinate {
@@ -28,8 +44,4 @@
   border-bottom: 3px solid transparent;
   width: 4%;
   transform-origin: left;
-}
-
-.side-container {
-  border: 1px solid red;
 }
