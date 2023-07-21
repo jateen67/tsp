@@ -1,5 +1,5 @@
 import "./App.css";
-import TSPVisualizer from "./TSPVisualizer/TSPVisualizer";
+import TSPVisualizer from "./components/TSPVisualizer";
 
 function App() {
   return (

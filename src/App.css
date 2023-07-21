@@ -8,6 +8,7 @@
   height: 100%;
   width: 100%;
   border: 1px solid green;
+  background-color: #222222;
 }
 
 .coordinate-container {
@@ -18,11 +19,15 @@
   top: 50%;
   transform: translate(0, -50%);
   border: 1px solid black;
+  background-color: #424242;
 }
 
 .side-container {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 35%;
+  background-color: #424242;
   border: 1px solid red;
 }
 
@@ -44,4 +49,58 @@
   border-bottom: 3px solid transparent;
   width: 4%;
   transform-origin: left;
+}
+
+.intro-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro-title {
+  text-align: center;
+}
+
+.stats-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.algorithm-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.algorithm-choose-and-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.controls-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls-choose {
+  display: flex;
+  flex-direction: row;
+}
+
+.delay-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.points-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.points-choose {
+  display: flex;
+  flex-direction: row;
 }

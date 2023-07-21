@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import * as algorithms from "../algorithms/algorithms";
-import "./TSPVisualizer.css";
 
 export default function TSPVisualizer() {
+  const [selectedAlgorithm, setSelectedAlgorithm] =
+    useState<string>("Nearest Neighbour");
+  const [coordsAmount, setCoordsAmount] = useState<string>("3");
   const [coords, setCoords] = useState<number[][]>([]);
 
   useEffect(() => {
-    resetCoords();
+    plot();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const nearestNeighbour = () => {
+    clearLines();
     const animations = algorithms.nearestNeighbor(coords).animations;
     for (let i = 0; i < animations.length; i++) {
       const { compare, cross } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
@@ -60,6 +63,7 @@ export default function TSPVisualizer() {
   };
 
   const depthFirstSearch = () => {
+    clearLines();
     const { path, totalDistance, animations } =
       algorithms.depthFirstSearch(coords);
     for (let i = 0; i < animations.length; i++) {
@@ -115,6 +119,7 @@ export default function TSPVisualizer() {
   };
 
   const simulatedAnnealing = () => {
+    clearLines();
     const xLength = coords[0][0] - coords[1][0];
     const yLength = coords[0][1] - coords[1][1];
     const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
@@ -176,6 +181,7 @@ export default function TSPVisualizer() {
   };
 
   const branchAndBound = () => {
+    clearLines();
     const { path, totalDistance, animations } =
       algorithms.branchAndBound(coords);
     for (let i = 0; i < animations.length; i++) {
@@ -250,18 +256,12 @@ export default function TSPVisualizer() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const resetCoords = () => {
-    const lines = document.getElementsByClassName(
-      "line"
-    ) as HTMLCollectionOf<HTMLElement>;
-
-    for (let i = 0; i < lines.length; i++) {
-      lines[i].style.backgroundColor = "rgba(255, 255, 255, 0)";
-    }
+  const plot = () => {
+    clearLines();
 
     const newCoords: number[][] = [];
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < Number(coordsAmount); i++) {
       let coord = [
         randomCoordFromInterval(0, 100),
         randomCoordFromInterval(0, 100),
@@ -281,6 +281,12 @@ export default function TSPVisualizer() {
     setCoords([...newCoords]);
   };
 
+  const changeSelectedAlgorithm = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setSelectedAlgorithm(e.target.value);
+  };
+
   const isArrayInArray = (array: number[][], item: number[]) => {
     const itemAsString = JSON.stringify(item);
 
@@ -291,14 +297,101 @@ export default function TSPVisualizer() {
     return contains;
   };
 
+  const play = () => {
+    switch (selectedAlgorithm) {
+      case "Nearest Neighbour":
+        nearestNeighbour();
+        break;
+      case "Depth First Search":
+        depthFirstSearch();
+        break;
+      case "Simulated Annealing":
+        simulatedAnnealing();
+        break;
+      case "Branch and Bound":
+        branchAndBound();
+        break;
+    }
+  };
+
+  const clearLines = () => {
+    const lines = document.getElementsByClassName(
+      "line"
+    ) as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < lines.length; i++) {
+      lines[i].style.backgroundColor = "transparent";
+    }
+  };
+
   return (
     <div className="container">
       <div className="side-container">
-        <button onClick={resetCoords}>Generate New Coordinates</button>
-        <button onClick={nearestNeighbour}>Nearest Neighbour</button>
-        <button onClick={depthFirstSearch}>Depth First Search</button>
-        <button onClick={simulatedAnnealing}>Simulated Annealing</button>
-        <button onClick={branchAndBound}>Branch and Bound</button>
+        <div className="intro-info-container">
+          <div className="intro-title">
+            Travelling Salesman Problem Visualizer
+          </div>
+          <div className="intro-description">
+            This site helps to visualize trying to solve the traveling salesman
+            problem. Simply plot points onto the graph, select an algorithm, and
+            watch the process! (Click here for more info)
+          </div>
+        </div>
+        <div className="stats-info-container">
+          <p>Best Path Distance: 0km</p>
+          <p>Current Path Distance: 0km</p>
+          <p>Time Elapsed: 0s</p>
+        </div>
+        <div className="controls-container">
+          <div className="algorithm-select">
+            <div className="algorithm-label">Algorithm</div>
+            <div className="algorithm-choose-and-info">
+              <select id="algorithms" onChange={changeSelectedAlgorithm}>
+                <option value="Nearest Neighbour">Nearest Neighbour</option>
+                <option value="Depth First Search">Depth First Search</option>
+                <option value="Simulated Annealing">Simulated Annealing</option>
+                <option value="Branch and Bound">Branch and Bound</option>
+              </select>
+              <button>?</button>
+            </div>
+          </div>
+          <div className="controls-select">
+            <div className="controls-label">Controls</div>
+            <div className="controls-choose">
+              <button onClick={play}>Play</button>
+              <button>Skip</button>
+              <button onClick={clearLines}>Clear Lines</button>
+            </div>
+          </div>
+          <div className="delay-select">
+            <div className="controls-label">Delay</div>
+            <div className="controls-choose">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                className="slider"
+                id="myRange"
+              ></input>
+            </div>
+          </div>
+          <div className="points-select">
+            <div className="points-label">Number of Random Points</div>
+            <div className="points-choose">
+              <input
+                className="slider"
+                type="range"
+                min="3"
+                max="10"
+                step="1"
+                defaultValue="3"
+                onChange={(e) => setCoordsAmount(e.target.value)}
+              ></input>
+              <button onClick={plot}>Plot</button>
+            </div>
+            <p>Possible Paths: 0</p>
+          </div>
+        </div>
       </div>
       <div className="main-container">
         <div className="coordinate-container">
@@ -318,13 +411,6 @@ export default function TSPVisualizer() {
             );
           })}
           {coords.map((items, idx) => {
-            const x1 = coords[0][0];
-            const x2 = items[0];
-            const y1 = coords[0][1];
-            const y2 = items[1];
-            const xLength = x2 - x1;
-            const yLength = y2 - y1;
-            const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
             return (
               <div
                 className="line"
