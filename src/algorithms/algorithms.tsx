@@ -1,6 +1,4 @@
 interface TSPResult {
-  path: number[][];
-  totalDistance: number;
   animations: Animation[];
 }
 
@@ -71,7 +69,7 @@ export const nearestNeighbor = (coordinates: number[][]): TSPResult => {
     finalPath: path,
   });
 
-  return { path, totalDistance, animations };
+  return { animations };
 };
 
 export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
@@ -141,7 +139,7 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         animations.push({
           backtrack: [
             coordinates[nextCity],
-            [0, Number(totalDistance.toFixed(2))],
+            [Number(totalDistance.toFixed(2))],
           ],
         });
         totalDistance -= distance;
@@ -152,7 +150,7 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
   dfs(currentCity, 1);
 
   animations.push({
-    backtrack: [coordinates[currentCity], [0, 0]],
+    backtrack: [coordinates[currentCity], [0]],
   });
   bestPath.push(coordinates[0], [Number(bestDistance.toFixed(2))]);
   animations.push({
@@ -160,8 +158,6 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
   });
 
   return {
-    path: bestPath,
-    totalDistance: bestDistance,
     animations,
   };
 };
@@ -200,12 +196,14 @@ export const simulatedAnnealing = (
     [initialPath[i], initialPath[j]] = [initialPath[j], initialPath[i]];
   }
   const currentPath: number[][] = [coordinates[0], ...initialPath]; // Add the starting point at the beginning
-  animations.push({
-    compare: currentPath,
-  });
   let currentDistance = calculateTotalDistance(currentPath);
   let bestPath: number[][] = [...currentPath];
   let bestDistance = currentDistance;
+  const a = currentPath.slice();
+  a.push([Number(bestDistance.toFixed(2))]);
+  animations.push({
+    compare: a,
+  });
 
   let x = 0;
   while (temperature > stoppingTemperature) {
@@ -215,14 +213,16 @@ export const simulatedAnnealing = (
     const newPath = [...currentPath]; // Create a new array to store the updated path
     [newPath[i], newPath[j]] = [newPath[j], newPath[i]];
 
-    if (x % 10000 === 0) {
-      animations.push({
-        compare: newPath,
-      });
-    }
-
     // Calculate the total distance of the new solution
     const newDistance = calculateTotalDistance(newPath);
+
+    const a = newPath.slice();
+    a.push([Number(newDistance.toFixed(2))]);
+    if (x % 10000 === 0) {
+      animations.push({
+        compare: a,
+      });
+    }
 
     // Determine if the new solution should be accepted
     if (
@@ -243,15 +243,13 @@ export const simulatedAnnealing = (
   }
 
   // Add the starting point at the end of the best path
-  bestPath.push(coordinates[0]);
+  bestPath.push(coordinates[0], [Number(bestDistance.toFixed(2))]);
 
   animations.push({
     finalPath: bestPath,
   });
 
   return {
-    path: bestPath,
-    totalDistance: bestDistance,
     animations,
   };
 };
@@ -289,7 +287,11 @@ export const branchAndBound = (coordinates: number[][]): TSPResult => {
       const totalDistance = currentDistance + distanceToStart;
       if (totalDistance < bestDistance) {
         animations.push({
-          cross: [coordinates[currentCity], coordinates[0]],
+          cross: [
+            coordinates[currentCity],
+            coordinates[0],
+            [Infinity, Number(totalDistance.toFixed(2))],
+          ],
         });
         bestDistance = totalDistance;
         bestPath = [...path, coordinates[0]];
@@ -305,7 +307,11 @@ export const branchAndBound = (coordinates: number[][]): TSPResult => {
 
           if (newDistance < bestDistance) {
             animations.push({
-              cross: [coordinates[currentCity], coordinates[nextCity]],
+              cross: [
+                coordinates[currentCity],
+                coordinates[nextCity],
+                [0, Number(newDistance.toFixed(2))],
+              ],
             });
             branchAndBound(nextCity, depth + 1, newDistance);
           }
@@ -316,19 +322,19 @@ export const branchAndBound = (coordinates: number[][]): TSPResult => {
     visited[currentCity] = false;
     path.pop();
     animations.push({
-      backtrack: [coordinates[currentCity]],
+      backtrack: [coordinates[currentCity], [0]],
     });
   }
 
   branchAndBound(0, 0, 0);
+
+  bestPath.push([Number(bestDistance.toFixed(2))]);
 
   animations.push({
     finalPath: bestPath,
   });
 
   return {
-    path: bestPath,
-    totalDistance: bestDistance,
     animations,
   };
 };

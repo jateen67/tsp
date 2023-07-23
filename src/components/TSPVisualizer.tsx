@@ -17,7 +17,7 @@ export default function TSPVisualizer() {
 
   const nearestNeighbour = () => {
     clearLines();
-    const animations = algorithms.nearestNeighbor(coords).animations;
+    const { animations } = algorithms.nearestNeighbor(coords);
     for (let i = 0; i < animations.length; i++) {
       const { compare, cross, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -93,8 +93,7 @@ export default function TSPVisualizer() {
 
   const depthFirstSearch = () => {
     clearLines();
-    const { path, totalDistance, animations } =
-      algorithms.depthFirstSearch(coords);
+    const { animations } = algorithms.depthFirstSearch(coords);
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -128,7 +127,7 @@ export default function TSPVisualizer() {
         }
         if (backtrack != undefined) {
           lines[backtrack[0][2]].style.backgroundColor = "transparent";
-          setcurrentPathDistance(backtrack[1][1]);
+          setcurrentPathDistance(backtrack[1][0]);
         }
         if (finalPath != undefined) {
           for (let i = 0; i < finalPath.length - 2; i++) {
@@ -161,7 +160,7 @@ export default function TSPVisualizer() {
     const xLength = coords[0][0] - coords[1][0];
     const yLength = coords[0][1] - coords[1][1];
     const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
-    const { path, totalDistance, animations } = algorithms.simulatedAnnealing(
+    const { animations } = algorithms.simulatedAnnealing(
       coords,
       100 * distance,
       1 - 1e-4,
@@ -179,7 +178,7 @@ export default function TSPVisualizer() {
           }
         }
         if (compare != undefined) {
-          for (let i = 0; i < compare.length - 1; i++) {
+          for (let i = 0; i < compare.length - 2; i++) {
             const x2 = compare[i][0];
             const x1 = compare[i + 1][0];
             const y2 = compare[i][1];
@@ -195,9 +194,13 @@ export default function TSPVisualizer() {
             lines[compare[i][2]].style.width = `${distance}%`;
             lines[compare[i][2]].style.transform = `rotate(${angle}deg)`;
           }
+          setcurrentPathDistance(compare[compare.length - 1][0]);
+          if (compare[compare.length - 1][0] < bestPathDistance) {
+            setbestPathDistance(compare[compare.length - 1][0]);
+          }
         }
         if (finalPath != undefined) {
-          for (let i = 0; i < finalPath.length - 1; i++) {
+          for (let i = 0; i < finalPath.length - 2; i++) {
             const x2 = finalPath[i][0];
             const x1 = finalPath[i + 1][0];
             const y2 = finalPath[i][1];
@@ -213,6 +216,10 @@ export default function TSPVisualizer() {
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
+          setcurrentPathDistance(finalPath[finalPath.length - 1][0]);
+          if (finalPath[finalPath.length - 1][0] < bestPathDistance) {
+            setbestPathDistance(finalPath[finalPath.length - 1][0]);
+          }
         }
       }, i * 200);
     }
@@ -220,8 +227,8 @@ export default function TSPVisualizer() {
 
   const branchAndBound = () => {
     clearLines();
-    const { path, totalDistance, animations } =
-      algorithms.branchAndBound(coords);
+    const { animations } = algorithms.branchAndBound(coords);
+
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, compare, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -248,6 +255,10 @@ export default function TSPVisualizer() {
           lines[cross[0][2]].style.backgroundColor = "red";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
+          setcurrentPathDistance(cross[2][1]);
+          if (cross[2][0] === Infinity && cross[2][1] < bestPathDistance) {
+            setbestPathDistance(cross[2][1]);
+          }
         }
         if (compare != undefined) {
           const x2 = compare[0][0];
@@ -267,9 +278,10 @@ export default function TSPVisualizer() {
         }
         if (backtrack != undefined) {
           lines[backtrack[0][2]].style.backgroundColor = "transparent";
+          setcurrentPathDistance(backtrack[1][0]);
         }
         if (finalPath != undefined) {
-          for (let i = 0; i < finalPath.length - 1; i++) {
+          for (let i = 0; i < finalPath.length - 2; i++) {
             const x2 = finalPath[i][0];
             const x1 = finalPath[i + 1][0];
             const y2 = finalPath[i][1];
@@ -285,8 +297,12 @@ export default function TSPVisualizer() {
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
+          setcurrentPathDistance(finalPath[finalPath.length - 1][0]);
+          if (finalPath[finalPath.length - 1][0] < bestPathDistance) {
+            setbestPathDistance(finalPath[finalPath.length - 1][0]);
+          }
         }
-      }, i * 500);
+      }, i * 200);
     }
   };
 
