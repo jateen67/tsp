@@ -47,25 +47,29 @@ export const nearestNeighbor = (coordinates: number[][]): TSPResult => {
       }
     }
 
+    totalDistance += nearestDistance;
     // Add the nearest coordinate to the path and mark it as visited
     path.push(coordinates[nearestIndex!]);
     animations.push({
-      cross: [currentCoordinate, coordinates[nearestIndex!]],
+      cross: [
+        currentCoordinate,
+        coordinates[nearestIndex!],
+        [0, Number(totalDistance.toFixed(2))],
+      ],
     });
     visited[nearestIndex!] = true;
     currentCoordinate = coordinates[nearestIndex!];
-    totalDistance += nearestDistance;
   }
 
-  // Add the starting point again to complete the cycle
-  path.push(start);
-  animations.push({
-    cross: [currentCoordinate, start],
-  });
   totalDistance += Math.hypot(
     currentCoordinate[0] - start[0],
     currentCoordinate[1] - start[1]
   );
+  // Add the starting point again to complete the cycle
+  path.push(start, [Number(totalDistance.toFixed(2))]);
+  animations.push({
+    finalPath: path,
+  });
 
   return { path, totalDistance, animations };
 };
@@ -93,10 +97,14 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         coordinates[currentCity][0] - coordinates[0][0],
         coordinates[currentCity][1] - coordinates[0][1]
       );
-      animations.push({
-        cross: [coordinates[currentCity], coordinates[0]],
-      });
       totalDistance += distance;
+      animations.push({
+        cross: [
+          coordinates[currentCity],
+          coordinates[0],
+          [Infinity, Number(totalDistance.toFixed(2))],
+        ],
+      });
 
       if (totalDistance < bestDistance) {
         bestDistance = totalDistance;
@@ -112,14 +120,18 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
       if (!visited[nextCity]) {
         visited[nextCity] = true;
         path.push(coordinates[nextCity]);
-        animations.push({
-          cross: [coordinates[currentCity], coordinates[nextCity]],
-        });
         const distance = Math.hypot(
           coordinates[currentCity][0] - coordinates[nextCity][0],
           coordinates[currentCity][1] - coordinates[nextCity][1]
         );
         totalDistance += distance;
+        animations.push({
+          cross: [
+            coordinates[currentCity],
+            coordinates[nextCity],
+            [0, Number(totalDistance.toFixed(2))],
+          ],
+        });
 
         dfs(nextCity, depth + 1);
 
@@ -127,7 +139,10 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         visited[nextCity] = false;
         path.pop();
         animations.push({
-          backtrack: [coordinates[nextCity]],
+          backtrack: [
+            coordinates[nextCity],
+            [0, Number(totalDistance.toFixed(2))],
+          ],
         });
         totalDistance -= distance;
       }
@@ -137,9 +152,9 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
   dfs(currentCity, 1);
 
   animations.push({
-    backtrack: [coordinates[currentCity], coordinates[0]],
+    backtrack: [coordinates[currentCity], [0, 0]],
   });
-  bestPath.push(coordinates[0]);
+  bestPath.push(coordinates[0], [Number(bestDistance.toFixed(2))]);
   animations.push({
     finalPath: bestPath,
   });

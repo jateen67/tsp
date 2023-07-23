@@ -6,9 +6,12 @@ export default function TSPVisualizer() {
     useState<string>("Nearest Neighbour");
   const [coordsAmount, setCoordsAmount] = useState<string>("3");
   const [coords, setCoords] = useState<number[][]>([]);
+  const [possiblePaths, setPossiblePaths] = useState<number>(1);
+  const [currentPathDistance, setcurrentPathDistance] = useState<number>(0);
+  const [bestPathDistance, setbestPathDistance] = useState<number>(Infinity);
 
   useEffect(() => {
-    plot();
+    plot(Number(coordsAmount));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -16,7 +19,7 @@ export default function TSPVisualizer() {
     clearLines();
     const animations = algorithms.nearestNeighbor(coords).animations;
     for (let i = 0; i < animations.length; i++) {
-      const { compare, cross } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
+      const { compare, cross, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
         const lines = document.getElementsByClassName(
           "line"
@@ -35,7 +38,7 @@ export default function TSPVisualizer() {
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
           let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-          if (x2 > x1) {
+          if (x2 >= x1) {
             angle += 180;
           }
           lines[compare[0][2]].style.backgroundColor = "blue";
@@ -51,12 +54,38 @@ export default function TSPVisualizer() {
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
           let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-          if (x2 > x1) {
+          if (x2 >= x1) {
             angle += 180;
           }
           lines[cross[0][2]].style.backgroundColor = "red";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
+          setcurrentPathDistance(cross[2][1]);
+          if (cross[2][0] === Infinity && cross[2][1] < bestPathDistance) {
+            setbestPathDistance(cross[2][1]);
+          }
+        }
+        if (finalPath != undefined) {
+          for (let i = 0; i < finalPath.length - 2; i++) {
+            const x2 = finalPath[i][0];
+            const x1 = finalPath[i + 1][0];
+            const y2 = finalPath[i][1];
+            const y1 = finalPath[i + 1][1];
+            const xLength = x2 - x1;
+            const yLength = y2 - y1;
+            const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
+            let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
+            if (x2 >= x1) {
+              angle += 180;
+            }
+            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.width = `${distance}%`;
+            lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
+          }
+          setcurrentPathDistance(finalPath[finalPath.length - 1][0]);
+          if (finalPath[finalPath.length - 1][0] < bestPathDistance) {
+            setbestPathDistance(finalPath[finalPath.length - 1][0]);
+          }
         }
       }, i * 500);
     }
@@ -86,18 +115,23 @@ export default function TSPVisualizer() {
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
           let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-          if (x2 > x1) {
+          if (x2 >= x1) {
             angle += 180;
           }
           lines[cross[0][2]].style.backgroundColor = "red";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
+          setcurrentPathDistance(cross[2][1]);
+          if (cross[2][0] === Infinity && cross[2][1] < bestPathDistance) {
+            setbestPathDistance(cross[2][1]);
+          }
         }
         if (backtrack != undefined) {
           lines[backtrack[0][2]].style.backgroundColor = "transparent";
+          setcurrentPathDistance(backtrack[1][1]);
         }
         if (finalPath != undefined) {
-          for (let i = 0; i < finalPath.length - 1; i++) {
+          for (let i = 0; i < finalPath.length - 2; i++) {
             const x2 = finalPath[i][0];
             const x1 = finalPath[i + 1][0];
             const y2 = finalPath[i][1];
@@ -106,15 +140,19 @@ export default function TSPVisualizer() {
             const yLength = y2 - y1;
             const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
             let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-            if (x2 > x1) {
+            if (x2 >= x1) {
               angle += 180;
             }
             lines[finalPath[i][2]].style.backgroundColor = "red";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
+          setcurrentPathDistance(finalPath[finalPath.length - 1][0]);
+          if (finalPath[finalPath.length - 1][0] < bestPathDistance) {
+            setbestPathDistance(finalPath[finalPath.length - 1][0]);
+          }
         }
-      }, i * 500);
+      }, i * 1000);
     }
   };
 
@@ -150,7 +188,7 @@ export default function TSPVisualizer() {
             const yLength = y2 - y1;
             const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
             let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-            if (x2 > x1) {
+            if (x2 >= x1) {
               angle += 180;
             }
             lines[compare[i][2]].style.backgroundColor = "blue";
@@ -168,7 +206,7 @@ export default function TSPVisualizer() {
             const yLength = y2 - y1;
             const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
             let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-            if (x2 > x1) {
+            if (x2 >= x1) {
               angle += 180;
             }
             lines[finalPath[i][2]].style.backgroundColor = "red";
@@ -176,7 +214,7 @@ export default function TSPVisualizer() {
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
         }
-      }, i * 500);
+      }, i * 200);
     }
   };
 
@@ -204,7 +242,7 @@ export default function TSPVisualizer() {
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
           let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-          if (x2 > x1) {
+          if (x2 >= x1) {
             angle += 180;
           }
           lines[cross[0][2]].style.backgroundColor = "red";
@@ -220,7 +258,7 @@ export default function TSPVisualizer() {
           const yLength = y2 - y1;
           const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
           let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-          if (x2 > x1) {
+          if (x2 >= x1) {
             angle += 180;
           }
           lines[compare[0][2]].style.backgroundColor = "blue";
@@ -240,7 +278,7 @@ export default function TSPVisualizer() {
             const yLength = y2 - y1;
             const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
             let angle = (Math.atan(yLength / xLength) * 180) / Math.PI;
-            if (x2 > x1) {
+            if (x2 >= x1) {
               angle += 180;
             }
             lines[finalPath[i][2]].style.backgroundColor = "red";
@@ -256,12 +294,14 @@ export default function TSPVisualizer() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const plot = () => {
+  const plot = (amount: number) => {
+    setcurrentPathDistance(0);
+    setbestPathDistance(Infinity);
     clearLines();
 
     const newCoords: number[][] = [];
 
-    for (let i = 0; i < Number(coordsAmount); i++) {
+    for (let i = 0; i < amount; i++) {
       let coord = [
         randomCoordFromInterval(0, 100),
         randomCoordFromInterval(0, 100),
@@ -323,6 +363,17 @@ export default function TSPVisualizer() {
     }
   };
 
+  const changePossiblePaths = (e: string) => {
+    let num = Number(e) - 1;
+    for (let i = num - 1; i >= 1; i--) {
+      num *= i;
+    }
+    num /= 2;
+    setCoordsAmount(e);
+    setPossiblePaths(num);
+    plot(Number(e));
+  };
+
   return (
     <div className="container">
       <div className="side-container">
@@ -337,9 +388,11 @@ export default function TSPVisualizer() {
           </div>
         </div>
         <div className="stats-info-container">
-          <p>Best Path Distance: 0km</p>
-          <p>Current Path Distance: 0km</p>
-          <p>Time Elapsed: 0s</p>
+          <p>
+            Best Path Distance:{" "}
+            {bestPathDistance === Infinity ? 0 : bestPathDistance}km
+          </p>
+          <p>Current Path Distance: {currentPathDistance}km</p>
         </div>
         <div className="controls-container">
           <div className="algorithm-select">
@@ -358,21 +411,7 @@ export default function TSPVisualizer() {
             <div className="controls-label">Controls</div>
             <div className="controls-choose">
               <button onClick={play}>Play</button>
-              <button>Skip</button>
               <button onClick={clearLines}>Clear Lines</button>
-            </div>
-          </div>
-          <div className="delay-select">
-            <div className="controls-label">Delay</div>
-            <div className="controls-choose">
-              <input
-                type="range"
-                min="1"
-                max="100"
-                value="50"
-                className="slider"
-                id="myRange"
-              ></input>
             </div>
           </div>
           <div className="points-select">
@@ -385,11 +424,13 @@ export default function TSPVisualizer() {
                 max="10"
                 step="1"
                 defaultValue="3"
-                onChange={(e) => setCoordsAmount(e.target.value)}
+                onChange={(e) => {
+                  changePossiblePaths(e.target.value);
+                }}
               ></input>
-              <button onClick={plot}>Plot</button>
+              <button onClick={() => plot(Number(coordsAmount))}>Plot</button>
             </div>
-            <p>Possible Paths: 0</p>
+            <p>Possible Unique Paths: {possiblePaths}</p>
           </div>
         </div>
       </div>
