@@ -1,5 +1,7 @@
 import { SetStateAction, useEffect, useState } from "react";
 import * as algorithms from "../algorithms/algorithms";
+import Modal from "./modals/algorithm-modal";
+import InfoModal from "./modals/info-modal";
 
 export default function TSPVisualizer() {
   const [selectedAlgorithm, setSelectedAlgorithm] =
@@ -9,6 +11,8 @@ export default function TSPVisualizer() {
   const [possiblePaths, setPossiblePaths] = useState<number>(1);
   const [currentPathDistance, setcurrentPathDistance] = useState<number>(0);
   const [bestPathDistance, setbestPathDistance] = useState<number>(Infinity);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openInfoModal, setOpenInfoModal] = useState<boolean>(false);
 
   useEffect(() => {
     plot(Number(coordsAmount));
@@ -88,6 +92,7 @@ export default function TSPVisualizer() {
           }
         }
       }, i * 500);
+      console.log("done");
     }
   };
 
@@ -370,6 +375,10 @@ export default function TSPVisualizer() {
     }
   };
 
+  const skip = () => {
+    void 0;
+  };
+
   const clearLines = () => {
     const lines = document.getElementsByClassName(
       "line"
@@ -400,7 +409,15 @@ export default function TSPVisualizer() {
           <div className="intro-description">
             This site helps to visualize trying to solve the traveling salesman
             problem. Simply plot points onto the graph, select an algorithm, and
-            watch the process! (Click here for more info)
+            watch the process!{" "}
+            <a
+              onClick={() => {
+                setOpenInfoModal(true);
+              }}
+            >
+              Click here
+            </a>{" "}
+            for more info
           </div>
         </div>
         <div className="stats-info-container">
@@ -420,13 +437,21 @@ export default function TSPVisualizer() {
                 <option value="Simulated Annealing">Simulated Annealing</option>
                 <option value="Branch and Bound">Branch and Bound</option>
               </select>
-              <button>?</button>
+              <button
+                className="open-modal-btn"
+                onClick={() => {
+                  setOpenModal(true);
+                }}
+              >
+                ?
+              </button>
             </div>
           </div>
           <div className="controls-select">
             <div className="controls-label">Controls</div>
             <div className="controls-choose">
               <button onClick={play}>Play</button>
+              <button onClick={skip}>Skip</button>
               <button onClick={clearLines}>Clear Lines</button>
             </div>
           </div>
@@ -482,6 +507,13 @@ export default function TSPVisualizer() {
           })}
         </div>
       </div>
+      {openModal && (
+        <Modal
+          closeModal={setOpenModal}
+          selectedAlgorithm={selectedAlgorithm}
+        />
+      )}
+      {openInfoModal && <InfoModal closeInfoModal={setOpenInfoModal} />}
     </div>
   );
 }

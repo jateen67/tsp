@@ -1,0 +1,181 @@
+import { Dispatch, SetStateAction } from "react";
+import "./modal.css";
+
+export default function Modal({
+  closeModal,
+  selectedAlgorithm,
+}: {
+  closeModal: Dispatch<SetStateAction<boolean>>;
+  selectedAlgorithm: string;
+}) {
+  const content = () => {
+    switch (selectedAlgorithm) {
+      case "Nearest Neighbour":
+        return (
+          <>
+            <div className="title">
+              <h1>Nearest Neighbour</h1>
+            </div>
+            <div className="body">
+              <p className="desc">
+                This is a heuristic, greedy algorithm. It continually travels to
+                the point closest to the current location.
+              </p>
+              <ol>
+                <li>Start at the beginning point</li>
+                <li>
+                  Go through all "unvisited" points to find the one with the
+                  shortest distance from the beginning point
+                </li>
+                <li>Travel to said closest point. Mark it as visited</li>
+                <li>
+                  Continue from Step 2 until there are no more unvisited points,
+                  then return to the start
+                </li>
+              </ol>
+            </div>
+          </>
+        );
+      case "Depth First Search":
+        return (
+          <>
+            <div className="title">
+              <h1>Depth First Search</h1>
+            </div>
+            <div className="body">
+              <p className="desc">
+                This is an exhaustive, brute-force algorithm. It's guaranteed to
+                find the best possible path, but depending on the number of
+                points plotted, it can be impractical. For example:
+              </p>
+              <ul>
+                <li>
+                  With 10 points plotted, there are 181,400 paths to evaluate
+                </li>
+                <li>
+                  With 11 points plotted, there are 1,814,000 paths to evaluate
+                </li>
+                <li>
+                  With 12 points plotted, there are 19,960,000 paths to evaluate
+                </li>
+                <li>
+                  With 20 points plotted, there are 60,822,550,204,416,000 paths
+                  to evaluate
+                </li>
+              </ul>
+              <p className="desc">
+                Since this growth is very inefficient (factorial growth), it
+                makes the Travelling Salesman Problem impractical to brute
+                force. This is why heuristic algorithms exist; they provide a
+                good approximation of the best path, but it's very difficult to
+                determine what the best path is without a doubt.
+              </p>
+              <p className="desc">Here's how the algorithm works:</p>
+              <ol>
+                <li>Start at the beginning point</li>
+                <li>
+                  Travel an arbitrary complete path, and mark that path as
+                  "visited"
+                </li>
+                <li>
+                  After travelling the complete path, recurse (backtrack) to a
+                  previous point, and find a new "unvisited" complete path
+                </li>
+                <li>
+                  Check back if the distance of this newly visited complete path
+                  is shorter than any previously travelled complete path
+                </li>
+                <li>
+                  Continue from Step 1 until there are no more unvisited
+                  complete paths
+                </li>
+              </ol>
+            </div>
+          </>
+        );
+      case "Simulated Annealing":
+        return (
+          <>
+            <div className="title">
+              <h1>Simulated Annealing</h1>
+            </div>
+            <div className="body">
+              <p className="desc">
+                This is a probabilistic technique for approximating the global
+                optimum of a given function. Specifically, it is a heuristic
+                algorithm that approximates global optimization in a large
+                search space.
+              </p>
+              <p className="desc">
+                For problems where finding an approximate global optimum is more
+                important than finding a precise local optimum in a fixed amount
+                of time, simulated annealing may be preferable to exact
+                algorithms.
+              </p>
+            </div>
+          </>
+        );
+      case "Branch and Bound":
+        return (
+          <>
+            <div className="title">
+              <h1>Branch and Bound</h1>
+            </div>
+            <div className="body">
+              <p className="desc">
+                This is a recursive algorithm, similar to depth first search,
+                that's guaranteed to find the optimal solution.
+              </p>
+              <p className="desc">
+                The candidate solution space is generated by systematically
+                traversing possible paths, and discarding large subsets of
+                fruitless candidates by comparing the current solution to an
+                upper and lower bound. In this case, the upper bound is the
+                shortest path found so far.
+              </p>
+              <p className="desc">
+                While evaluating paths, if at any point the current solution is
+                already more expensive (longer) than the best complete path
+                discovered, there is no point continuing.
+              </p>
+              <p className="desc">For example, imagine:</p>
+              <ol>
+                <li>
+                  A -&gt; B -&gt; C -&gt; D -&gt; E -&gt; A was already found
+                  with a cost of 100
+                </li>
+                <li>
+                  We are evaluating A -&gt; C -&gt; E, which has a cost of 110.
+                  There is no point evaluating the remaining solutions
+                </li>
+                <li>
+                  Instead of continuing to evaluate all of the child solutions
+                  from here, we can go down a different path, eliminating
+                  candidates not worth evaluating:
+                  <ul>
+                    <li>A -&gt; C -&gt; E -&gt; D -&gt; B -&gt; A</li>
+                    <li>A -&gt; C -&gt; E -&gt; B -&gt; D -&gt; A</li>
+                  </ul>
+                </li>
+              </ol>
+              <p className="desc">
+                Implementation is very similar to depth first search, with the
+                exception that we cut paths that are already longer than the
+                current best.
+              </p>
+            </div>
+          </>
+        );
+    }
+  };
+  return (
+    <div className="modal-background">
+      <div className="modal-container">
+        <div className="title-close-btn">
+          <button onClick={() => closeModal(false)}>x</button>
+        </div>
+        {content()}
+      </div>
+    </div>
+  );
+}

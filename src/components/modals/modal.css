@@ -1,0 +1,69 @@
+.modal-background {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgb(0 0 0/50%) 0 0);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInBackground 0.2s;
+}
+
+.modal-container {
+  width: 60%;
+  max-height: 85%;
+  overflow-y: scroll;
+  border-radius: 12px;
+  background-color: #424242;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border: 1px solid red;
+  animation: fadeInModal 0.3s;
+}
+
+@keyframes fadeInModal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBackground {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.title-close-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title-close-btn button {
+  background-color: transparent;
+  color: #c9c7c7;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modal-container .body {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link {
+  color: #0080ff;
+}
