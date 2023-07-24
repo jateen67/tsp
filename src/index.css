@@ -2,7 +2,6 @@
   height: 100%;
   margin: 0 auto;
   overflow: hidden;
-  color: #c9c7c7;
 }
 
 html,
@@ -10,4 +9,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
+  font-family: "Roboto";
+  line-height: 1.43;
+  color: #fff;
 }

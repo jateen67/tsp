@@ -7,8 +7,8 @@
 .main-container {
   height: 100%;
   width: 100%;
-  border: 1px solid green;
   background-color: #222222;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .coordinate-container {
@@ -18,8 +18,8 @@
   margin: 0 auto;
   top: 50%;
   transform: translate(0, -50%);
-  border: 1px solid black;
   background-color: #424242;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .side-container {
@@ -28,7 +28,7 @@
   height: 100%;
   width: 35%;
   background-color: #424242;
-  border: 1px solid red;
+  padding: 16px;
 }
 
 .coordinate {
@@ -51,23 +51,40 @@
   transform-origin: left;
 }
 
+.line-break {
+  border: none;
+  height: 1px;
+  margin: 0;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
 .intro-info-container {
   display: flex;
   flex-direction: column;
+  padding: 16px;
 }
 
 .intro-title {
   text-align: center;
 }
 
+.intro-description {
+  color: #c9c7c7;
+}
+
 .stats-info-container {
   display: flex;
   flex-direction: column;
+  padding: 16px;
 }
 
 .controls-container {
   display: flex;
   flex-direction: column;
+  border: 2px solid rgb(255, 145, 0);
+  padding: 16px;
+  border-radius: 10px;
 }
 
 .algorithm-select {

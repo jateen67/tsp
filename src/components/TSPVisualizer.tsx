@@ -404,11 +404,11 @@ export default function TSPVisualizer() {
       <div className="side-container">
         <div className="intro-info-container">
           <div className="intro-title">
-            Travelling Salesman Problem Visualizer
+            <h3>Travelling Salesman Problem Visualizer</h3>
           </div>
           <div className="intro-description">
-            This site helps to visualize trying to solve the traveling salesman
-            problem. Simply plot points onto the graph, select an algorithm, and
+            This site helps to visualize trying to solve the Traveling Salesman
+            Problem. Simply plot points onto the graph, select an algorithm, and
             watch the process!{" "}
             <a
               onClick={() => {
@@ -420,6 +420,7 @@ export default function TSPVisualizer() {
             for more info
           </div>
         </div>
+        <hr className="line-break"></hr>
         <div className="stats-info-container">
           <p>
             Best Path Distance:{" "}

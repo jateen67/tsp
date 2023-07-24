@@ -8,7 +8,7 @@ export default function InfoModal({
 }) {
   return (
     <div className="modal-background">
-      <div className="modal-container">
+      <div className="modal-container info-modal-container">
         <div className="title-close-btn">
           <button onClick={() => closeInfoModal(false)}>x</button>
         </div>
