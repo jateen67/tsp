@@ -96,13 +96,20 @@ export const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         coordinates[currentCity][1] - coordinates[0][1]
       );
       totalDistance += distance;
-      animations.push({
-        cross: [
-          coordinates[currentCity],
-          coordinates[0],
-          [Infinity, Number(totalDistance.toFixed(2))],
-        ],
-      });
+
+      if (totalDistance < bestDistance) {
+        animations.push({
+          cross: [
+            coordinates[currentCity],
+            coordinates[0],
+            [Infinity, Number(totalDistance.toFixed(2))],
+          ],
+        });
+      } else {
+        animations.push({
+          cross: [coordinates[currentCity], coordinates[0], [0, 0]],
+        });
+      }
 
       if (totalDistance < bestDistance) {
         bestDistance = totalDistance;

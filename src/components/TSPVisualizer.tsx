@@ -29,7 +29,7 @@ export default function TSPVisualizer() {
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
         for (let i = 0; i < lines.length; i++) {
-          if (lines[i].style.backgroundColor != "red") {
+          if (lines[i].style.backgroundColor != "rgb(201, 199, 199)") {
             lines[i].style.backgroundColor = "transparent";
           }
         }
@@ -45,7 +45,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[compare[0][2]].style.backgroundColor = "blue";
+          lines[compare[0][2]].style.backgroundColor = "rgb(255, 145, 0)";
           lines[compare[0][2]].style.width = `${distance}%`;
           lines[compare[0][2]].style.transform = `rotate(${angle}deg)`;
         }
@@ -61,7 +61,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[cross[0][2]].style.backgroundColor = "red";
+          lines[cross[0][2]].style.backgroundColor = "rgb(201, 199, 199)";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
           setcurrentPathDistance(cross[2][1]);
@@ -82,7 +82,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -92,7 +92,6 @@ export default function TSPVisualizer() {
           }
         }
       }, i * 500);
-      console.log("done");
     }
   };
 
@@ -106,7 +105,7 @@ export default function TSPVisualizer() {
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
         for (let i = 0; i < lines.length; i++) {
-          if (lines[i].style.backgroundColor != "red") {
+          if (lines[i].style.backgroundColor != "rgb(201, 199, 199)") {
             lines[i].style.backgroundColor = "transparent";
           }
         }
@@ -122,7 +121,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[cross[0][2]].style.backgroundColor = "red";
+          lines[cross[0][2]].style.backgroundColor = "rgb(201, 199, 199)";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
           setcurrentPathDistance(cross[2][1]);
@@ -147,7 +146,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -156,7 +155,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 1000);
+      }, i * 100);
     }
   };
 
@@ -178,7 +177,7 @@ export default function TSPVisualizer() {
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
         for (let i = 0; i < lines.length; i++) {
-          if (lines[i].style.backgroundColor != "red") {
+          if (lines[i].style.backgroundColor != "rgb(201, 199, 199)") {
             lines[i].style.backgroundColor = "transparent";
           }
         }
@@ -195,7 +194,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[compare[i][2]].style.backgroundColor = "blue";
+            lines[compare[i][2]].style.backgroundColor = "rgb(255, 145, 0)";
             lines[compare[i][2]].style.width = `${distance}%`;
             lines[compare[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -217,7 +216,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -241,7 +240,7 @@ export default function TSPVisualizer() {
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
         for (let i = 0; i < lines.length; i++) {
-          if (lines[i].style.backgroundColor != "red") {
+          if (lines[i].style.backgroundColor != "rgb(201, 199, 199)") {
             lines[i].style.backgroundColor = "transparent";
           }
         }
@@ -257,7 +256,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[cross[0][2]].style.backgroundColor = "red";
+          lines[cross[0][2]].style.backgroundColor = "rgb(201, 199, 199)";
           lines[cross[0][2]].style.width = `${distance}%`;
           lines[cross[0][2]].style.transform = `rotate(${angle}deg)`;
           setcurrentPathDistance(cross[2][1]);
@@ -277,7 +276,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[compare[0][2]].style.backgroundColor = "blue";
+          lines[compare[0][2]].style.backgroundColor = "rgb(255, 145, 0)";
           lines[compare[0][2]].style.width = `${distance}%`;
           lines[compare[0][2]].style.transform = `rotate(${angle}deg)`;
         }
@@ -298,7 +297,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "red";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -307,7 +306,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 200);
+      }, i * 50);
     }
   };
 
@@ -375,10 +374,6 @@ export default function TSPVisualizer() {
     }
   };
 
-  const skip = () => {
-    void 0;
-  };
-
   const clearLines = () => {
     const lines = document.getElementsByClassName(
       "line"
@@ -433,9 +428,11 @@ export default function TSPVisualizer() {
             <div className="algorithm-label">Algorithm</div>
             <div className="algorithm-choose-and-info">
               <select id="algorithms" onChange={changeSelectedAlgorithm}>
+                <option disabled>Heuristic</option>
                 <option value="Nearest Neighbour">Nearest Neighbour</option>
-                <option value="Depth First Search">Depth First Search</option>
                 <option value="Simulated Annealing">Simulated Annealing</option>
+                <option disabled>Exhaustive</option>
+                <option value="Depth First Search">Depth First Search</option>
                 <option value="Branch and Bound">Branch and Bound</option>
               </select>
               <button
@@ -452,7 +449,6 @@ export default function TSPVisualizer() {
             <div className="controls-label">Controls</div>
             <div className="controls-choose">
               <button onClick={play}>Play</button>
-              <button onClick={skip}>Skip</button>
               <button onClick={clearLines}>Clear Lines</button>
             </div>
           </div>
@@ -463,7 +459,7 @@ export default function TSPVisualizer() {
                 className="slider"
                 type="range"
                 min="3"
-                max="10"
+                max="5"
                 step="1"
                 defaultValue="3"
                 onChange={(e) => {
@@ -474,6 +470,9 @@ export default function TSPVisualizer() {
             </div>
             <p>Possible Unique Paths: {possiblePaths}</p>
           </div>
+        </div>
+        <div className="legend-container">
+          <div className="legend-label">Legend</div>
         </div>
       </div>
       <div className="main-container">
@@ -488,9 +487,7 @@ export default function TSPVisualizer() {
                   left: `${items[0]}%`,
                   top: `${items[1]}%`,
                 }}
-              >
-                {items[0]}, {items[1]}
-              </div>
+              ></div>
             );
           })}
           {coords.map((items, idx) => {
