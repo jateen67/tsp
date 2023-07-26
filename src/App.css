@@ -13,8 +13,8 @@
 
 .coordinate-container {
   position: relative;
-  height: 750px;
-  width: 750px;
+  height: 500px;
+  width: 500px;
   margin: 0 auto;
   top: 50%;
   transform: translate(0, -50%);
@@ -29,26 +29,28 @@
   width: 35%;
   background-color: #424242;
   padding: 16px;
+  overflow-y: scroll;
 }
 
 .coordinate {
   height: 15px;
   width: 15px;
-  background-color: aqua;
+  background-color: rgb(54, 113, 223);
   border-radius: 50%;
   margin-left: -7.5px;
   margin-top: -7.5px;
 }
 
 .coordinate:first-child {
-  background-color: red;
+  background-color: rgb(255, 89, 0);
 }
 
 .line {
   position: absolute;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
   width: 4%;
   transform-origin: left;
+  z-index: -1;
 }
 
 .line-break {
@@ -71,6 +73,10 @@
 
 .intro-description {
   color: #c9c7c7;
+}
+
+.click-here {
+  color: rgb(255, 145, 0);
 }
 
 .stats-info-container {
@@ -120,4 +126,68 @@
 .points-choose {
   display: flex;
   flex-direction: row;
+}
+
+.legend-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.legend-item {
+  flex-direction: row;
+  align-items: center;
+}
+
+.legend-red-point {
+  height: 15px;
+  width: 15px;
+  background-color: rgb(255, 89, 0);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.legend-blue-point {
+  height: 15px;
+  width: 15px;
+  background-color: rgb(54, 113, 223);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.legend-orange-line {
+  border-bottom: 4px solid rgb(255, 89, 0);
+  width: 15px;
+  margin: 0 auto;
+}
+
+.legend-grey-line {
+  border-bottom: 4px solid rgb(201, 199, 199);
+  width: 15px;
+  margin: 0 auto;
+}
+
+.legend-green-line {
+  border-bottom: 4px solid rgb(0, 200, 0);
+  width: 15px;
+  margin: 0 auto;
+}
+
+.points-legend-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lines-legend-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.line-item {
+  text-align: center;
+  box-sizing: border-box;
+  width: 33%;
 }

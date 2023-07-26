@@ -45,7 +45,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[compare[0][2]].style.backgroundColor = "rgb(255, 145, 0)";
+          lines[compare[0][2]].style.backgroundColor = "rgb(255, 89, 0)";
           lines[compare[0][2]].style.width = `${distance}%`;
           lines[compare[0][2]].style.transform = `rotate(${angle}deg)`;
         }
@@ -82,7 +82,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(0, 200, 0)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -146,7 +146,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(0, 200, 0)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -194,7 +194,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[compare[i][2]].style.backgroundColor = "rgb(255, 145, 0)";
+            lines[compare[i][2]].style.backgroundColor = "rgb(255, 89, 0)";
             lines[compare[i][2]].style.width = `${distance}%`;
             lines[compare[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -216,7 +216,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(0, 200, 0)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -276,7 +276,7 @@ export default function TSPVisualizer() {
           if (x2 >= x1) {
             angle += 180;
           }
-          lines[compare[0][2]].style.backgroundColor = "rgb(255, 145, 0)";
+          lines[compare[0][2]].style.backgroundColor = "rgb(255, 89, 0)";
           lines[compare[0][2]].style.width = `${distance}%`;
           lines[compare[0][2]].style.transform = `rotate(${angle}deg)`;
         }
@@ -297,7 +297,7 @@ export default function TSPVisualizer() {
             if (x2 >= x1) {
               angle += 180;
             }
-            lines[finalPath[i][2]].style.backgroundColor = "rgb(201, 199, 199)";
+            lines[finalPath[i][2]].style.backgroundColor = "rgb(0, 200, 0)";
             lines[finalPath[i][2]].style.width = `${distance}%`;
             lines[finalPath[i][2]].style.transform = `rotate(${angle}deg)`;
           }
@@ -406,6 +406,7 @@ export default function TSPVisualizer() {
             Problem. Simply plot points onto the graph, select an algorithm, and
             watch the process!{" "}
             <a
+              className="click-here"
               onClick={() => {
                 setOpenInfoModal(true);
               }}
@@ -473,6 +474,30 @@ export default function TSPVisualizer() {
         </div>
         <div className="legend-container">
           <div className="legend-label">Legend</div>
+          <div className="points-legend-container">
+            <div className="legend-item legend-red-point-container">
+              <div className="legend-red-point"></div>
+              <p>Starting Point</p>
+            </div>
+            <div className="legend-item legend-blue-point-container">
+              <div className="legend-blue-point"></div>
+              <p>Other Points</p>
+            </div>
+          </div>
+          <div className="lines-legend-container">
+            <div className="line-item legend-item legend-orange-line-container">
+              <div className="legend-orange-line"></div>
+              <p>Analyzed Path</p>
+            </div>
+            <div className="line-item legend-item legend-grey-line-container">
+              <div className="legend-grey-line"></div>
+              <p>Crossed Path</p>
+            </div>
+            <div className="line-item legend-item legend-green-line-container">
+              <div className="legend-green-line"></div>
+              <p>Finalized Path</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="main-container">
