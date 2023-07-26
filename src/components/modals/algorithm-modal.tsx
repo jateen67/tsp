@@ -14,7 +14,7 @@ export default function Modal({
         return (
           <>
             <div className="title">
-              <h1>Nearest Neighbour</h1>
+              <h2>Nearest Neighbour</h2>
             </div>
             <div className="body">
               <p className="desc">
@@ -40,7 +40,7 @@ export default function Modal({
         return (
           <>
             <div className="title">
-              <h1>Depth First Search</h1>
+              <h2>Depth First Search</h2>
             </div>
             <div className="body">
               <p className="desc">
@@ -97,7 +97,7 @@ export default function Modal({
         return (
           <>
             <div className="title">
-              <h1>Simulated Annealing</h1>
+              <h2>Simulated Annealing</h2>
             </div>
             <div className="body">
               <p className="desc">
@@ -119,7 +119,7 @@ export default function Modal({
         return (
           <>
             <div className="title">
-              <h1>Branch and Bound</h1>
+              <h2>Branch and Bound</h2>
             </div>
             <div className="body">
               <p className="desc">
@@ -170,7 +170,7 @@ export default function Modal({
   };
   return (
     <div className="modal-background">
-      <div className="modal-container">
+      <div className="algo-modal-container">
         <div className="title-close-btn">
           <button onClick={() => closeModal(false)}>x</button>
         </div>
