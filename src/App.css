@@ -13,8 +13,8 @@
 
 .coordinate-container {
   position: relative;
-  height: 500px;
-  width: 500px;
+  height: 96%;
+  aspect-ratio: 1/1;
   margin: 0 auto;
   top: 50%;
   transform: translate(0, -50%);
@@ -29,12 +29,16 @@
   width: 35%;
   background-color: #424242;
   padding: 16px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 960px) {
   .container {
     flex-direction: column-reverse;
+  }
+
+  .main-container {
+    height: 50%;
   }
 
   .side-container {
