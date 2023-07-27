@@ -91,7 +91,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 200);
+      }, i * 250);
     }
   };
 
@@ -225,7 +225,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 200);
+      }, i * 250);
     }
   };
 
@@ -403,8 +403,8 @@ export default function TSPVisualizer() {
           </div>
           <div className="intro-description">
             This site allows you to visualize algorithms that attempt to solve
-            the Traveling Salesman Problem. Simply plot points, select an
-            algorithm, and watch the process!{" "}
+            the Travelling Salesman Problem. Simply plot points, select an
+            algorithm, and observe!{" "}
             <a
               className="click-here"
               onClick={() => {
@@ -418,11 +418,11 @@ export default function TSPVisualizer() {
         </div>
         <hr className="line-break"></hr>
         <div className="stats-info-container">
-          <p>
+          <p className="stats">
             <span style={{ color: "#c9c7c7" }}>Best Path Distance:</span>{" "}
             {bestPathDistance === Infinity ? 0 : bestPathDistance}km
           </p>
-          <p>
+          <p className="stats">
             <span style={{ color: "#c9c7c7" }}>Current Path Distance: </span>
             {currentPathDistance}km
           </p>
@@ -462,7 +462,12 @@ export default function TSPVisualizer() {
           </div>
           <div className="points-select">
             <div className="points-label">
-              <span style={{ color: "#c9c7c7" }}>Number of Random Points</span>
+              <span style={{ color: "#c9c7c7" }}>
+                Points{" "}
+                <span style={{ fontSize: "0.7rem" }}>
+                  Max. 5 for practicality/efficiency
+                </span>
+              </span>
             </div>
             <div className="points-choose">
               <input
@@ -478,10 +483,12 @@ export default function TSPVisualizer() {
               ></input>
               <button onClick={() => plot(Number(coordsAmount))}>Plot</button>
             </div>
-            <p>
+            <p className="number-of-paths">
               {" "}
-              <span style={{ color: "#c9c7c7" }}>Possible Unique Paths: </span>
-              {possiblePaths}
+              <span style={{ color: "#c9c7c7" }}>Unique Paths: </span>
+              {possiblePaths === 1
+                ? `${possiblePaths} path`
+                : `${possiblePaths} paths`}
             </p>
           </div>
         </div>

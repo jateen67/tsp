@@ -32,7 +32,7 @@
   overflow-y: auto;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 975px) {
   .container {
     flex-direction: column-reverse;
   }
@@ -43,6 +43,12 @@
 
   .side-container {
     width: auto;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .side-container {
+    padding: 7px;
   }
 }
 
@@ -99,6 +105,11 @@
   padding: 16px;
 }
 
+.stats {
+  display: flex;
+  justify-content: space-between;
+}
+
 .controls-container {
   display: flex;
   flex-direction: column;
@@ -140,6 +151,11 @@
 .points-choose {
   display: flex;
   flex-direction: row;
+}
+
+.number-of-paths {
+  display: flex;
+  justify-content: space-between;
 }
 
 .legend-container {
