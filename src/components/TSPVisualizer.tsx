@@ -91,7 +91,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 500);
+      }, i * 250);
     }
   };
 
@@ -155,7 +155,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 100);
+      }, i * 120);
     }
   };
 
@@ -306,7 +306,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 50);
+      }, i * 120);
     }
   };
 
@@ -419,14 +419,19 @@ export default function TSPVisualizer() {
         <hr className="line-break"></hr>
         <div className="stats-info-container">
           <p>
-            Best Path Distance:{" "}
+            <span style={{ color: "#c9c7c7" }}>Best Path Distance:</span>{" "}
             {bestPathDistance === Infinity ? 0 : bestPathDistance}km
           </p>
-          <p>Current Path Distance: {currentPathDistance}km</p>
+          <p>
+            <span style={{ color: "#c9c7c7" }}>Current Path Distance: </span>
+            {currentPathDistance}km
+          </p>
         </div>
         <div className="controls-container">
           <div className="algorithm-select">
-            <div className="algorithm-label">Algorithm</div>
+            <div className="algorithm-label">
+              <span style={{ color: "#c9c7c7" }}>Algorithm</span>
+            </div>
             <div className="algorithm-choose-and-info">
               <select id="algorithms" onChange={changeSelectedAlgorithm}>
                 <option disabled>Heuristic</option>
@@ -447,14 +452,18 @@ export default function TSPVisualizer() {
             </div>
           </div>
           <div className="controls-select">
-            <div className="controls-label">Controls</div>
+            <div className="controls-label">
+              <span style={{ color: "#c9c7c7" }}>Controls</span>
+            </div>
             <div className="controls-choose">
               <button onClick={play}>Play</button>
               <button onClick={clearLines}>Clear Lines</button>
             </div>
           </div>
           <div className="points-select">
-            <div className="points-label">Number of Random Points</div>
+            <div className="points-label">
+              <span style={{ color: "#c9c7c7" }}>Number of Random Points</span>
+            </div>
             <div className="points-choose">
               <input
                 className="slider"
@@ -469,11 +478,17 @@ export default function TSPVisualizer() {
               ></input>
               <button onClick={() => plot(Number(coordsAmount))}>Plot</button>
             </div>
-            <p>Possible Unique Paths: {possiblePaths}</p>
+            <p>
+              {" "}
+              <span style={{ color: "#c9c7c7" }}>Possible Unique Paths: </span>
+              {possiblePaths}
+            </p>
           </div>
         </div>
         <div className="legend-container">
-          <div className="legend-label">Legend</div>
+          <div className="legend-label">
+            <span style={{ color: "#c9c7c7" }}>Legend</span>
+          </div>
           <div className="points-legend-container">
             <div className="legend-item legend-red-point-container">
               <div className="legend-red-point"></div>
@@ -498,6 +513,12 @@ export default function TSPVisualizer() {
               <p>Finalized Path</p>
             </div>
           </div>
+        </div>
+        <div className="copyright-container">
+          <p style={{ color: "#c9c7c7" }}>
+            &copy; {new Date().getFullYear()}{" "}
+            <span style={{ color: "rgb(255, 145, 0)" }}>Jatin Kalsi</span>
+          </p>
         </div>
       </div>
       <div className="main-container">
