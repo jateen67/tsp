@@ -402,8 +402,8 @@ export default function TSPVisualizer() {
             <h3>Travelling Salesman Problem Visualizer</h3>
           </div>
           <div className="intro-description">
-            This site shows you attempts at trying to solve the Traveling
-            Salesman Problem by visualizing. Simply plot points, select an
+            This site allows you to visualize algorithms that attempt to solve
+            the Traveling Salesman Problem. Simply plot points, select an
             algorithm, and watch the process!{" "}
             <a
               className="click-here"
