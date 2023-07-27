@@ -91,7 +91,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 250);
+      }, i * 200);
     }
   };
 
@@ -155,7 +155,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 120);
+      }, i * 110);
     }
   };
 
@@ -306,7 +306,7 @@ export default function TSPVisualizer() {
             setbestPathDistance(finalPath[finalPath.length - 1][0]);
           }
         }
-      }, i * 120);
+      }, i * 110);
     }
   };
 
@@ -413,7 +413,7 @@ export default function TSPVisualizer() {
             >
               Click here
             </a>{" "}
-            for more info
+            for more info.
           </div>
         </div>
         <hr className="line-break"></hr>
