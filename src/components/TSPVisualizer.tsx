@@ -59,6 +59,12 @@ export default function TSPVisualizer() {
     slider[0].style.pointerEvents = "none";
     slider[0].style.opacity = "0.5";
 
+    const loadingSlider = document.getElementsByClassName(
+      "loading-slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    loadingSlider[0].style.visibility = "visible";
+
     for (let i = 0; i < animations.length; i++) {
       const { compare, cross, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -73,6 +79,7 @@ export default function TSPVisualizer() {
           plotButton[0].style.opacity = "1";
           slider[0].style.pointerEvents = "all";
           slider[0].style.opacity = "1";
+          loadingSlider[0].style.visibility = "hidden";
         }
         const lines = document.getElementsByClassName(
           "line"
@@ -184,6 +191,12 @@ export default function TSPVisualizer() {
     slider[0].style.pointerEvents = "none";
     slider[0].style.opacity = "0.5";
 
+    const loadingSlider = document.getElementsByClassName(
+      "loading-slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    loadingSlider[0].style.visibility = "visible";
+
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -198,6 +211,7 @@ export default function TSPVisualizer() {
           plotButton[0].style.opacity = "1";
           slider[0].style.pointerEvents = "all";
           slider[0].style.opacity = "1";
+          loadingSlider[0].style.visibility = "hidden";
         }
         const lines = document.getElementsByClassName(
           "line"
@@ -305,6 +319,12 @@ export default function TSPVisualizer() {
     slider[0].style.pointerEvents = "none";
     slider[0].style.opacity = "0.5";
 
+    const loadingSlider = document.getElementsByClassName(
+      "loading-slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    loadingSlider[0].style.visibility = "visible";
+
     for (let i = 0; i < animations.length; i++) {
       const { compare, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -319,6 +339,7 @@ export default function TSPVisualizer() {
           plotButton[0].style.opacity = "1";
           slider[0].style.pointerEvents = "all";
           slider[0].style.opacity = "1";
+          loadingSlider[0].style.visibility = "hidden";
         }
         const lines = document.getElementsByClassName(
           "line"
@@ -416,6 +437,12 @@ export default function TSPVisualizer() {
     slider[0].style.pointerEvents = "none";
     slider[0].style.opacity = "0.5";
 
+    const loadingSlider = document.getElementsByClassName(
+      "loading-slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    loadingSlider[0].style.visibility = "visible";
+
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, compare, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
@@ -430,6 +457,7 @@ export default function TSPVisualizer() {
           plotButton[0].style.opacity = "1";
           slider[0].style.pointerEvents = "all";
           slider[0].style.opacity = "1";
+          loadingSlider[0].style.visibility = "hidden";
         }
         const lines = document.getElementsByClassName(
           "line"
@@ -733,6 +761,11 @@ export default function TSPVisualizer() {
         </div>
       </div>
       <div className="main-container">
+        <div className="loading-slider">
+          <div className="loading-line"></div>
+          <div className="subline inc"></div>
+          <div className="subline dec"></div>
+        </div>
         <div className="coordinate-container">
           {coords.map((items, idx) => {
             return (
