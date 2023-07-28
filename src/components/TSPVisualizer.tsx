@@ -21,10 +21,59 @@ export default function TSPVisualizer() {
 
   const nearestNeighbour = () => {
     clearLines();
+
     const { animations } = algorithms.nearestNeighbor(coords);
+
+    const algoSelector = document.getElementsByClassName(
+      "algorithms"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    algoSelector[0].style.pointerEvents = "none";
+    algoSelector[0].style.opacity = "0.5";
+
+    const playButton = document.getElementsByClassName(
+      "play-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    playButton[0].style.pointerEvents = "none";
+    playButton[0].style.opacity = "0.5";
+
+    const clearButton = document.getElementsByClassName(
+      "clear-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    clearButton[0].style.pointerEvents = "none";
+    clearButton[0].style.opacity = "0.5";
+
+    const plotButton = document.getElementsByClassName(
+      "plot-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    plotButton[0].style.pointerEvents = "none";
+    plotButton[0].style.opacity = "0.5";
+
+    const slider = document.getElementsByClassName(
+      "slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    slider[0].style.pointerEvents = "none";
+    slider[0].style.opacity = "0.5";
+
     for (let i = 0; i < animations.length; i++) {
       const { compare, cross, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          algoSelector[0].style.pointerEvents = "all";
+          algoSelector[0].style.opacity = "1";
+          playButton[0].style.pointerEvents = "all";
+          playButton[0].style.opacity = "1";
+          clearButton[0].style.pointerEvents = "all";
+          clearButton[0].style.opacity = "1";
+          plotButton[0].style.pointerEvents = "all";
+          plotButton[0].style.opacity = "1";
+          slider[0].style.pointerEvents = "all";
+          slider[0].style.opacity = "1";
+        }
         const lines = document.getElementsByClassName(
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -97,10 +146,59 @@ export default function TSPVisualizer() {
 
   const depthFirstSearch = () => {
     clearLines();
+
     const { animations } = algorithms.depthFirstSearch(coords);
+
+    const algoSelector = document.getElementsByClassName(
+      "algorithms"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    algoSelector[0].style.pointerEvents = "none";
+    algoSelector[0].style.opacity = "0.5";
+
+    const playButton = document.getElementsByClassName(
+      "play-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    playButton[0].style.pointerEvents = "none";
+    playButton[0].style.opacity = "0.5";
+
+    const clearButton = document.getElementsByClassName(
+      "clear-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    clearButton[0].style.pointerEvents = "none";
+    clearButton[0].style.opacity = "0.5";
+
+    const plotButton = document.getElementsByClassName(
+      "plot-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    plotButton[0].style.pointerEvents = "none";
+    plotButton[0].style.opacity = "0.5";
+
+    const slider = document.getElementsByClassName(
+      "slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    slider[0].style.pointerEvents = "none";
+    slider[0].style.opacity = "0.5";
+
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          algoSelector[0].style.pointerEvents = "all";
+          algoSelector[0].style.opacity = "1";
+          playButton[0].style.pointerEvents = "all";
+          playButton[0].style.opacity = "1";
+          clearButton[0].style.pointerEvents = "all";
+          clearButton[0].style.opacity = "1";
+          plotButton[0].style.pointerEvents = "all";
+          plotButton[0].style.opacity = "1";
+          slider[0].style.pointerEvents = "all";
+          slider[0].style.opacity = "1";
+        }
         const lines = document.getElementsByClassName(
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -161,6 +259,7 @@ export default function TSPVisualizer() {
 
   const simulatedAnnealing = () => {
     clearLines();
+
     const xLength = coords[0][0] - coords[1][0];
     const yLength = coords[0][1] - coords[1][1];
     const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
@@ -170,9 +269,57 @@ export default function TSPVisualizer() {
       1 - 1e-4,
       1e-6
     );
+
+    const algoSelector = document.getElementsByClassName(
+      "algorithms"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    algoSelector[0].style.pointerEvents = "none";
+    algoSelector[0].style.opacity = "0.5";
+
+    const playButton = document.getElementsByClassName(
+      "play-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    playButton[0].style.pointerEvents = "none";
+    playButton[0].style.opacity = "0.5";
+
+    const clearButton = document.getElementsByClassName(
+      "clear-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    clearButton[0].style.pointerEvents = "none";
+    clearButton[0].style.opacity = "0.5";
+
+    const plotButton = document.getElementsByClassName(
+      "plot-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    plotButton[0].style.pointerEvents = "none";
+    plotButton[0].style.opacity = "0.5";
+
+    const slider = document.getElementsByClassName(
+      "slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    slider[0].style.pointerEvents = "none";
+    slider[0].style.opacity = "0.5";
+
     for (let i = 0; i < animations.length; i++) {
       const { compare, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          algoSelector[0].style.pointerEvents = "all";
+          algoSelector[0].style.opacity = "1";
+          playButton[0].style.pointerEvents = "all";
+          playButton[0].style.opacity = "1";
+          clearButton[0].style.pointerEvents = "all";
+          clearButton[0].style.opacity = "1";
+          plotButton[0].style.pointerEvents = "all";
+          plotButton[0].style.opacity = "1";
+          slider[0].style.pointerEvents = "all";
+          slider[0].style.opacity = "1";
+        }
         const lines = document.getElementsByClassName(
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -231,11 +378,59 @@ export default function TSPVisualizer() {
 
   const branchAndBound = () => {
     clearLines();
+
     const { animations } = algorithms.branchAndBound(coords);
+
+    const algoSelector = document.getElementsByClassName(
+      "algorithms"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    algoSelector[0].style.pointerEvents = "none";
+    algoSelector[0].style.opacity = "0.5";
+
+    const playButton = document.getElementsByClassName(
+      "play-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    playButton[0].style.pointerEvents = "none";
+    playButton[0].style.opacity = "0.5";
+
+    const clearButton = document.getElementsByClassName(
+      "clear-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    clearButton[0].style.pointerEvents = "none";
+    clearButton[0].style.opacity = "0.5";
+
+    const plotButton = document.getElementsByClassName(
+      "plot-button"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    plotButton[0].style.pointerEvents = "none";
+    plotButton[0].style.opacity = "0.5";
+
+    const slider = document.getElementsByClassName(
+      "slider"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    slider[0].style.pointerEvents = "none";
+    slider[0].style.opacity = "0.5";
 
     for (let i = 0; i < animations.length; i++) {
       const { cross, backtrack, compare, finalPath } = animations[i]; // [[x1, y1, idx of element in dom], [x2, y2, idx of element in dom]]
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          algoSelector[0].style.pointerEvents = "all";
+          algoSelector[0].style.opacity = "1";
+          playButton[0].style.pointerEvents = "all";
+          playButton[0].style.opacity = "1";
+          clearButton[0].style.pointerEvents = "all";
+          clearButton[0].style.opacity = "1";
+          plotButton[0].style.pointerEvents = "all";
+          plotButton[0].style.opacity = "1";
+          slider[0].style.pointerEvents = "all";
+          slider[0].style.opacity = "1";
+        }
         const lines = document.getElementsByClassName(
           "line"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -433,7 +628,7 @@ export default function TSPVisualizer() {
               <span style={{ color: "#c9c7c7" }}>Algorithm</span>
             </div>
             <div className="algorithm-choose-and-info">
-              <select id="algorithms" onChange={changeSelectedAlgorithm}>
+              <select className="algorithms" onChange={changeSelectedAlgorithm}>
                 <option disabled>Heuristic</option>
                 <option value="Nearest Neighbour">Nearest Neighbour</option>
                 <option value="Simulated Annealing">Simulated Annealing</option>
@@ -456,8 +651,12 @@ export default function TSPVisualizer() {
               <span style={{ color: "#c9c7c7" }}>Controls</span>
             </div>
             <div className="controls-choose">
-              <button onClick={play}>Play</button>
-              <button onClick={clearLines}>Clear Lines</button>
+              <button className="play-button" onClick={play}>
+                Play
+              </button>
+              <button className="clear-button" onClick={clearLines}>
+                Clear Lines
+              </button>
             </div>
           </div>
           <div className="points-select">
@@ -481,7 +680,12 @@ export default function TSPVisualizer() {
                   changePossiblePaths(e.target.value);
                 }}
               ></input>
-              <button onClick={() => plot(Number(coordsAmount))}>Plot</button>
+              <button
+                className="plot-button"
+                onClick={() => plot(Number(coordsAmount))}
+              >
+                Plot
+              </button>
             </div>
             <p className="number-of-paths">
               {" "}
@@ -509,7 +713,7 @@ export default function TSPVisualizer() {
           <div className="lines-legend-container">
             <div className="line-item legend-item legend-orange-line-container">
               <div className="legend-orange-line"></div>
-              <p>Analyzed Path</p>
+              <p>Analyzing Path</p>
             </div>
             <div className="line-item legend-item legend-grey-line-container">
               <div className="legend-grey-line"></div>
