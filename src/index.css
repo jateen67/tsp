@@ -9,7 +9,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   line-height: 1.43;
   color: #fff;
 }
