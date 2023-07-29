@@ -2,7 +2,7 @@
 
 The Traveling Salesman Problem is an infamous theoretical computer science problem asks the following: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?".
 
-[gif]
+![tspgif](https://github.com/jateen67/tsp/assets/106696411/35152fa7-8e62-40ca-978f-8c53fbdf0c9a)
 
 ## Project
 
