@@ -1,5 +1,7 @@
 # Travelling Salesman Problem Visualizer
 
+[gif]
+
 The Traveling Salesman Problem is an infamous theoretical computer science problem asks the following: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?".
 
 ## Project
@@ -28,5 +30,5 @@ Exhaustive algorithms always find the best solution by searching through and eva
 
 Built using:
 
-- [https://react.dev/](React.js)
-- [https://www.typescriptlang.org/](TypeScript)
+- [React.js](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
