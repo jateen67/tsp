@@ -22,7 +22,7 @@ export default function InfoModal({
             distances between each pair of cities, what is the shortest possible
             route that visits each city and returns to the origin city?".
           </p>
-          <h3>This project</h3>
+          <h2>This project</h2>
           <ul>
             <li>
               The goal of this site is to help users visualize, and learn
