@@ -110,6 +110,22 @@
   justify-content: space-between;
 }
 
+.best-path-distance-label {
+  color: #c9c7c7;
+}
+
+.best-path-distance {
+  font-weight: bolder;
+}
+
+.current-path-distance-label {
+  color: #c9c7c7;
+}
+
+.current-path-distance {
+  font-weight: bolder;
+}
+
 .controls-container {
   display: flex;
   flex-direction: column;
@@ -122,6 +138,10 @@
 .algorithm-select {
   display: flex;
   flex-direction: column;
+}
+
+.algorithm-label {
+  color: #c9c7c7;
 }
 
 .algorithm-choose-and-info {
@@ -172,6 +192,10 @@
 .controls-select {
   display: flex;
   flex-direction: column;
+}
+
+.controls-label {
+  color: #c9c7c7;
 }
 
 .controls-choose {
@@ -228,6 +252,14 @@
 .points-select {
   display: flex;
   flex-direction: column;
+}
+
+.points-label {
+  color: #c9c7c7;
+}
+
+.points-label-warning {
+  font-size: 0.7rem;
 }
 
 .points-choose {
@@ -295,10 +327,22 @@
   justify-content: space-between;
 }
 
+.unique-paths-label {
+  color: #c9c7c7;
+}
+
+.unique-paths {
+  font-weight: bolder;
+}
+
 .legend-container {
   display: flex;
   flex-direction: column;
   padding: 16px;
+}
+
+.legend-label {
+  color: #c9c7c7;
 }
 
 .legend-item {
@@ -363,6 +407,14 @@
   margin-top: -20px;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.copyright-date {
+  color: #c9c7c7;
+}
+
+.copyright-name {
+  color: rgb(255, 145, 0);
 }
 
 .loading-slider {
