@@ -1,5 +1,5 @@
 import { SetStateAction, useEffect, useState } from "react";
-import * as algorithms from "../algorithms/algorithms";
+import * as algorithms from "../algorithms/index";
 import Modal from "./modals/algorithm-modal";
 import InfoModal from "./modals/info-modal";
 
@@ -19,7 +19,7 @@ export default function TSPVisualizer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const nearestNeighbour = () => {
+  const playNearestNeighbour = () => {
     clearLines();
 
     const { animations } = algorithms.nearestNeighbor(coords);
@@ -151,7 +151,7 @@ export default function TSPVisualizer() {
     }
   };
 
-  const depthFirstSearch = () => {
+  const playDepthFirstSearch = () => {
     clearLines();
 
     const { animations } = algorithms.depthFirstSearch(coords);
@@ -271,7 +271,7 @@ export default function TSPVisualizer() {
     }
   };
 
-  const simulatedAnnealing = () => {
+  const playSimulatedAnnealing = () => {
     clearLines();
 
     const xLength = coords[0][0] - coords[1][0];
@@ -397,7 +397,7 @@ export default function TSPVisualizer() {
     }
   };
 
-  const branchAndBound = () => {
+  const playBranchAndBound = () => {
     clearLines();
 
     const { animations } = algorithms.branchAndBound(coords);
@@ -583,21 +583,22 @@ export default function TSPVisualizer() {
   const play = () => {
     switch (selectedAlgorithm) {
       case "Nearest Neighbour":
-        nearestNeighbour();
+        playNearestNeighbour();
         break;
       case "Depth First Search":
-        depthFirstSearch();
+        playDepthFirstSearch();
         break;
       case "Simulated Annealing":
-        simulatedAnnealing();
+        playSimulatedAnnealing();
         break;
       case "Branch and Bound":
-        branchAndBound();
+        playBranchAndBound();
         break;
     }
   };
 
   const clearLines = () => {
+    setcurrentPathDistance(0);
     const lines = document.getElementsByClassName(
       "line"
     ) as HTMLCollectionOf<HTMLElement>;
