@@ -785,6 +785,7 @@ export default function TSPVisualizer() {
                   position: "absolute",
                   left: `${items[0]}%`,
                   top: `${items[1]}%`,
+                  transition: "0.3s",
                 }}
               ></div>
             );

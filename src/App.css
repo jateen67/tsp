@@ -233,11 +233,38 @@
 .points-choose {
   display: flex;
   flex-direction: row;
+  gap: 5px;
 }
 
 .slider {
-  height: 30px;
+  height: 2.5px;
   width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 15px;
+  background-color: rgb(255, 145, 0);
+  margin: auto;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  width: 12px;
+  background-color: rgb(255, 145, 0);
+  border-radius: 50%;
+  border: none;
+  transition: 0.1s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 8px rgba(255, 145, 0, 0.17);
+}
+
+.slider:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 12px rgba(255, 145, 0, 0.17);
 }
 
 .plot-button {
