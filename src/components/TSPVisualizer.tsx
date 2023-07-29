@@ -642,12 +642,16 @@ export default function TSPVisualizer() {
         <hr className="line-break"></hr>
         <div className="stats-info-container">
           <p className="stats">
-            <span style={{ color: "#c9c7c7" }}>Best Path Distance:</span>{" "}
-            {bestPathDistance === Infinity ? 0 : bestPathDistance}km
+            <span style={{ color: "#c9c7c7" }}>Best Path Distance:</span>
+            <span style={{ fontWeight: "bolder" }}>
+              {bestPathDistance === Infinity ? 0 : bestPathDistance}km
+            </span>
           </p>
           <p className="stats">
             <span style={{ color: "#c9c7c7" }}>Current Path Distance: </span>
-            {currentPathDistance}km
+            <span style={{ fontWeight: "bolder" }}>
+              {currentPathDistance}km
+            </span>
           </p>
         </div>
         <div className="controls-container">
@@ -657,15 +661,19 @@ export default function TSPVisualizer() {
             </div>
             <div className="algorithm-choose-and-info">
               <select className="algorithms" onChange={changeSelectedAlgorithm}>
-                <option disabled>Heuristic</option>
-                <option value="Nearest Neighbour">Nearest Neighbour</option>
-                <option value="Simulated Annealing">Simulated Annealing</option>
-                <option disabled>Exhaustive</option>
-                <option value="Depth First Search">Depth First Search</option>
-                <option value="Branch and Bound">Branch and Bound</option>
+                <optgroup label="Heuristic">
+                  <option value="Nearest Neighbour">Nearest Neighbour</option>
+                  <option value="Simulated Annealing">
+                    Simulated Annealing
+                  </option>
+                </optgroup>
+                <optgroup label="Exhaustive">
+                  <option value="Depth First Search">Depth First Search</option>
+                  <option value="Branch and Bound">Branch and Bound</option>
+                </optgroup>
               </select>
               <button
-                className="open-modal-btn"
+                className="open-modal-button"
                 onClick={() => {
                   setOpenModal(true);
                 }}
@@ -716,11 +724,12 @@ export default function TSPVisualizer() {
               </button>
             </div>
             <p className="number-of-paths">
-              {" "}
               <span style={{ color: "#c9c7c7" }}>Unique Paths: </span>
-              {possiblePaths === 1
-                ? `${possiblePaths} path`
-                : `${possiblePaths} paths`}
+              <span style={{ fontWeight: "bolder" }}>
+                {possiblePaths === 1
+                  ? `${possiblePaths} path`
+                  : `${possiblePaths} paths`}
+              </span>
             </p>
           </div>
         </div>

@@ -116,6 +116,7 @@
   border: 2px solid rgb(255, 145, 0);
   padding: 16px;
   border-radius: 10px;
+  gap: 16px;
 }
 
 .algorithm-select {
@@ -126,6 +127,46 @@
 .algorithm-choose-and-info {
   display: flex;
   flex-direction: row;
+  gap: 5px;
+}
+
+.algorithms {
+  height: 40px;
+  width: 90%;
+  color: #fff;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  padding-left: 8px;
+  transition: 0.3s;
+  font-weight: bolder;
+}
+
+.algorithms:hover {
+  border: 1px solid #fff;
+}
+
+.open-modal-button {
+  height: 40px;
+  aspect-ratio: 1/1;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5em;
+  font-weight: bolder;
+  transition: 0.3s;
+}
+
+.open-modal-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+.open-modal-button:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: 0.3s;
 }
 
 .controls-select {
@@ -138,9 +179,50 @@
   flex-direction: row;
 }
 
-.delay-select {
-  display: flex;
-  flex-direction: column;
+.play-button {
+  height: 30px;
+  width: 100%;
+  color: rgb(255, 145, 0);
+  background-color: transparent;
+  border: 1px solid rgba(255, 145, 0, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: 0.3s;
+}
+
+.play-button:hover {
+  border: 1px solid rgb(255, 145, 0);
+  background-color: rgba(255, 145, 0, 0.1);
+  transition: 0.3s;
+}
+
+.play-button:active {
+  background-color: rgba(255, 145, 0, 0.4);
+  transition: 0.3s;
+}
+
+.clear-button {
+  height: 30px;
+  width: 100%;
+  color: rgb(255, 145, 0);
+  background-color: transparent;
+  border: 1px solid rgba(255, 145, 0, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: 0.3s;
+}
+
+.clear-button:hover {
+  border: 1px solid rgb(255, 145, 0);
+  background-color: rgba(255, 145, 0, 0.1);
+  transition: 0.3s;
+}
+
+.clear-button:active {
+  background-color: rgba(255, 145, 0, 0.4);
+  transition: 0.3s;
 }
 
 .points-select {
@@ -151,6 +233,34 @@
 .points-choose {
   display: flex;
   flex-direction: row;
+}
+
+.slider {
+  height: 30px;
+  width: 100%;
+}
+
+.plot-button {
+  height: 30px;
+  width: 100%;
+  color: rgb(255, 145, 0);
+  background-color: transparent;
+  border: 1px solid rgba(255, 145, 0, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: 0.3s;
+}
+
+.plot-button:hover {
+  border: 1px solid rgb(255, 145, 0);
+  background-color: rgba(255, 145, 0, 0.1);
+  transition: 0.3s;
+}
+
+.plot-button:active {
+  background-color: rgba(255, 145, 0, 0.4);
+  transition: 0.3s;
 }
 
 .number-of-paths {
