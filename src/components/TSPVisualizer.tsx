@@ -1,7 +1,12 @@
 import { SetStateAction, useEffect, useState } from "react";
 import * as algorithms from "../algorithms/index";
-import Modal from "./modals/algorithm-modal";
-import InfoModal from "./modals/info-modal";
+import Intro from "./side-container/intro";
+import Stats from "./side-container/stats";
+import Legend from "./side-container/legend";
+import Copyright from "./side-container/copyright";
+import Controls from "./side-container/controls";
+import LoadingSlider from "./main-container/loading-slider";
+import Coordinates from "./main-container/coordinates";
 
 export default function TSPVisualizer() {
   const [selectedAlgorithm, setSelectedAlgorithm] =
@@ -11,8 +16,6 @@ export default function TSPVisualizer() {
   const [possiblePaths, setPossiblePaths] = useState<number>(1);
   const [currentPathDistance, setcurrentPathDistance] = useState<number>(0);
   const [bestPathDistance, setbestPathDistance] = useState<number>(Infinity);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [openInfoModal, setOpenInfoModal] = useState<boolean>(false);
 
   useEffect(() => {
     plot(Number(coordsAmount));
@@ -621,202 +624,29 @@ export default function TSPVisualizer() {
   return (
     <div className="container">
       <div className="side-container">
-        <div className="intro-info-container">
-          <div className="intro-title">
-            <h3>Travelling Salesman Problem Visualizer</h3>
-          </div>
-          <div className="intro-description">
-            This site allows you to visualize algorithms that attempt to solve
-            the Travelling Salesman Problem. Simply plot points, select an
-            algorithm, and observe!{" "}
-            <a
-              className="click-here"
-              onClick={() => {
-                setOpenInfoModal(true);
-              }}
-            >
-              Click here
-            </a>{" "}
-            for more info.
-          </div>
-        </div>
+        <Intro />
         <hr className="line-break"></hr>
-        <div className="stats-info-container">
-          <p className="stats">
-            <span className="best-path-distance-label">
-              Best Path Distance:
-            </span>
-            <span className="best-path-distance">
-              {bestPathDistance === Infinity ? 0 : bestPathDistance}km
-            </span>
-          </p>
-          <p className="stats">
-            <span className="current-path-distance-label">
-              Current Path Distance:
-            </span>
-            <span className="current-path-distance">
-              {currentPathDistance}km
-            </span>
-          </p>
-        </div>
-        <div className="controls-container">
-          <div className="algorithm-select">
-            <div className="algorithm-label">
-              <span>Algorithm</span>
-            </div>
-            <div className="algorithm-choose-and-info">
-              <select className="algorithms" onChange={changeSelectedAlgorithm}>
-                <optgroup label="Heuristic">
-                  <option value="Nearest Neighbour">Nearest Neighbour</option>
-                  <option value="Simulated Annealing">
-                    Simulated Annealing
-                  </option>
-                </optgroup>
-                <optgroup label="Exhaustive">
-                  <option value="Depth First Search">Depth First Search</option>
-                  <option value="Branch and Bound">Branch and Bound</option>
-                </optgroup>
-              </select>
-              <button
-                className="open-modal-button"
-                onClick={() => {
-                  setOpenModal(true);
-                }}
-              >
-                ?
-              </button>
-            </div>
-          </div>
-          <div className="controls-select">
-            <div className="controls-label">
-              <span>Controls</span>
-            </div>
-            <div className="controls-choose">
-              <button className="play-button" onClick={play}>
-                Play
-              </button>
-              <button className="clear-button" onClick={clearLines}>
-                Clear Lines
-              </button>
-            </div>
-          </div>
-          <div className="points-select">
-            <div className="points-label">
-              <span>
-                Points{" "}
-                <span className="points-label-warning">
-                  Max. 5 for practicality/efficiency
-                </span>
-              </span>
-            </div>
-            <div className="points-choose">
-              <input
-                className="slider"
-                type="range"
-                min="3"
-                max="5"
-                step="1"
-                defaultValue="3"
-                onChange={(e) => {
-                  changePossiblePaths(e.target.value);
-                }}
-              ></input>
-              <button
-                className="plot-button"
-                onClick={() => plot(Number(coordsAmount))}
-              >
-                Plot
-              </button>
-            </div>
-            <p className="number-of-paths">
-              <span className="unique-paths-label">Unique Paths: </span>
-              <span className="unique-paths">
-                {possiblePaths === 1
-                  ? `${possiblePaths} path`
-                  : `${possiblePaths} paths`}
-              </span>
-            </p>
-          </div>
-        </div>
-        <div className="legend-container">
-          <div className="legend-label">
-            <span>Legend</span>
-          </div>
-          <div className="points-legend-container">
-            <div className="legend-item legend-red-point-container">
-              <div className="legend-red-point"></div>
-              <p>Starting Point</p>
-            </div>
-            <div className="legend-item legend-blue-point-container">
-              <div className="legend-blue-point"></div>
-              <p>Other Points</p>
-            </div>
-          </div>
-          <div className="lines-legend-container">
-            <div className="line-item legend-item legend-orange-line-container">
-              <div className="legend-orange-line"></div>
-              <p>Analyzing Path</p>
-            </div>
-            <div className="line-item legend-item legend-grey-line-container">
-              <div className="legend-grey-line"></div>
-              <p>Crossed Path</p>
-            </div>
-            <div className="line-item legend-item legend-green-line-container">
-              <div className="legend-green-line"></div>
-              <p>Finalized Path</p>
-            </div>
-          </div>
-        </div>
-        <div className="copyright-container">
-          <p className="copyright-date">
-            &copy; {new Date().getFullYear()}{" "}
-            <span className="copyright-name">Jatin Kalsi</span>
-          </p>
-        </div>
+        <Stats
+          currentPathDistance={currentPathDistance}
+          bestPathDistance={bestPathDistance}
+        />
+        <Controls
+          possiblePaths={possiblePaths}
+          selectedAlgorithm={selectedAlgorithm}
+          coordsAmount={coordsAmount}
+          changeSelectedAlgorithm={changeSelectedAlgorithm}
+          changePossiblePaths={changePossiblePaths}
+          plot={plot}
+          play={play}
+          clearLines={clearLines}
+        />
+        <Legend />
+        <Copyright />
       </div>
       <div className="main-container">
-        <div className="loading-slider">
-          <div className="loading-line"></div>
-          <div className="subline inc"></div>
-          <div className="subline dec"></div>
-        </div>
-        <div className="coordinate-container">
-          {coords.map((items, idx) => {
-            return (
-              <div
-                className="coordinate"
-                key={idx}
-                style={{
-                  position: "absolute",
-                  left: `${items[0]}%`,
-                  top: `${items[1]}%`,
-                  transition: "0.3s",
-                }}
-              ></div>
-            );
-          })}
-          {coords.map((items, idx) => {
-            return (
-              <div
-                className="line"
-                key={idx}
-                style={{
-                  left: `${items[0]}%`,
-                  top: `${items[1]}%`,
-                  width: "1%",
-                }}
-              ></div>
-            );
-          })}
-        </div>
+        <LoadingSlider />
+        <Coordinates coords={coords} />
       </div>
-      {openModal && (
-        <Modal
-          closeModal={setOpenModal}
-          selectedAlgorithm={selectedAlgorithm}
-        />
-      )}
-      {openInfoModal && <InfoModal closeInfoModal={setOpenInfoModal} />}
     </div>
   );
 }
