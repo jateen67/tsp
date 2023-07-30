@@ -122,7 +122,7 @@ const animatePath = (
       if (i === animations.length - 1) {
         updateUI(false);
       }
-    }, i * 250);
+    }, i * setDelay(selectedAlgorithm));
   }
 };
 
@@ -156,6 +156,21 @@ const setLineStyles = (
   lines.style.backgroundColor = color;
   lines.style.width = `${distance}%`;
   lines.style.transform = `rotate(${angle}deg)`;
+};
+
+const setDelay = (selectedAlgorithm: string) => {
+  switch (selectedAlgorithm) {
+    case "Nearest Neighbour":
+      return 250;
+    case "Simulated Annealing":
+      return 250;
+    case "Depth First Search":
+      return 100;
+    case "Branch and Bound":
+      return 100;
+    default:
+      return 250;
+  }
 };
 
 export { animatePath, updateUI };
