@@ -280,6 +280,7 @@ export default function TSPVisualizer() {
     const xLength = coords[0][0] - coords[1][0];
     const yLength = coords[0][1] - coords[1][1];
     const distance = Math.sqrt(xLength ** 2 + yLength ** 2);
+
     const { animations } = algorithms.simulatedAnnealing(
       coords,
       100 * distance,
@@ -536,6 +537,12 @@ export default function TSPVisualizer() {
     }
   };
 
+  const changeSelectedAlgorithm = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setSelectedAlgorithm(e.target.value);
+  };
+
   const randomCoordFromInterval = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
@@ -567,12 +574,6 @@ export default function TSPVisualizer() {
     setCoords([...newCoords]);
   };
 
-  const changeSelectedAlgorithm = (e: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setSelectedAlgorithm(e.target.value);
-  };
-
   const isArrayInArray = (array: number[][], item: number[]) => {
     const itemAsString = JSON.stringify(item);
 
@@ -581,6 +582,17 @@ export default function TSPVisualizer() {
     });
 
     return contains;
+  };
+
+  const changePossiblePaths = (e: string) => {
+    let num = Number(e) - 1;
+    for (let i = num - 1; i >= 1; i--) {
+      num *= i;
+    }
+    num /= 2;
+    setCoordsAmount(e);
+    setPossiblePaths(num);
+    plot(Number(e));
   };
 
   const play = () => {
@@ -608,17 +620,6 @@ export default function TSPVisualizer() {
     for (let i = 0; i < lines.length; i++) {
       lines[i].style.backgroundColor = "transparent";
     }
-  };
-
-  const changePossiblePaths = (e: string) => {
-    let num = Number(e) - 1;
-    for (let i = num - 1; i >= 1; i--) {
-      num *= i;
-    }
-    num /= 2;
-    setCoordsAmount(e);
-    setPossiblePaths(num);
-    plot(Number(e));
   };
 
   return (
