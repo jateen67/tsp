@@ -35,7 +35,11 @@ const depthFirstSearch = (coordinates: number[][]): TSPResult => {
         });
       } else {
         animations.push({
-          cross: [coordinates[currentCity], coordinates[0], [0, 0]],
+          cross: [
+            coordinates[currentCity],
+            coordinates[0],
+            [0, Number(totalDistance.toFixed(2))],
+          ],
         });
       }
 
