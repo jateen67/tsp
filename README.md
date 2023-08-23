@@ -26,6 +26,11 @@ Exhaustive algorithms always find the best solution by searching through and eva
 - Depth First Search
 - Branch and Bound
 
+## How to run
+
+1. Run `npm install` in the root directory to install dependencies
+2. Run `npm run dev`
+
 ## Technologies
 
 Built using:
